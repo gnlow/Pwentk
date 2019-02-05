@@ -3,6 +3,7 @@ var pwentk = {
 	sprites: [],
 	Sprite: class{
 		constructor(name, visible, shapes, shapeNumber, scaleX, scaleY, x, y, z, rotation){			
+			this.id = Math.random().toString(36).substr(2, 5);
 			this.setName(name, false);
 			this.setVisible(visible || true, false);
 			this.shapes = shapes || [{name:"Sample image",img:this.genImg("http://lorempixel.com/960/540/")}];
@@ -17,10 +18,10 @@ var pwentk = {
 
 		setName(name, doEvent = true){
 			if(!name){
-				this.setName("스프라이트 "+Math.random().toString(36).substr(2, 5), doEvent);
+				this.setName(`스프라이트 ${this.id}`, doEvent);
 				pwentk.genErr(22,this);
 			}else if(pwentk.sprites.some(val=>{return val.name==String(name);})){
-				this.setName("스프라이트 "+Math.random().toString(36).substr(2, 5), doEvent);
+				this.setName(`스프라이트 ${this.id}`, doEvent);
 				pwentk.genErr(11,this);
 			}else{
 				this.name = String(name);
@@ -185,20 +186,25 @@ var pwentk = {
 	event: {
 		newSprite: function(sprite){return sprite;}
 	},
-	getSprite: function(info){
-		if(typeof info === "number"){
-			let returnTemp = this.sprites[info];
-			if(returnTemp){
-				return returnTemp;
-			}else{
-				pwentk.genErr(12);
+	getSprite: function(info, option = "name"){
+		switch(info.constructor.name){
+			case "Number":{
+				let returnTemp = this.sprites[info];
+				if(returnTemp){
+					return returnTemp;
+				}else{
+					pwentk.genErr(12);
+				}
+				break;
 			}
-		}else if(typeof info === "string"){
-			let returnTemp = this.sprites.filter(val => {return val.name == info;})[0];
-			if(returnTemp){
-				return returnTemp;
-			}else{
-				pwentk.genErr(13);
+			case "String":{
+				let returnTemp = this.sprites.filter(val => {return val[option] == info;})[0];
+				if(returnTemp){
+					return returnTemp;
+				}else{
+					pwentk.genErr(13);
+				}
+				break;
 			}
 		}
 	}

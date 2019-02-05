@@ -21,7 +21,7 @@ var pwentkFabric = {
 	},
 	spriteToObject:function(sprite){
 		return {
-			id: sprite.name,
+			id: sprite.id,
 			left: sprite.x+ canvas.width/2,
 			top: -sprite.y+ canvas.height/2,
 			angle: sprite.rotation,
@@ -34,7 +34,7 @@ var pwentkFabric = {
 pwentk.event.newSprite = pwentkFabric.newSprite;
 
 pwentk.event.changed = function(sprite){
-	let targetObject = canvas.getObjects().filter(val => {return val.id == sprite.name;})[0];
+	let targetObject = canvas.getObjects().filter(val => {return val.id == sprite.id;})[0];
 	if(targetObject){
 		if(sprite.visible){
 			targetObject.set(pwentkFabric.spriteToObject(sprite));
@@ -48,11 +48,10 @@ pwentk.event.changed = function(sprite){
 };
 
 canvas.on("object:modified", function(event){
-	pwentk.getSprite(event.target.id)
+	pwentk.getSprite(event.target.id, "id")
 	.setX(event.target.left- canvas.width/2, false)
 	.setY(-event.target.top+ canvas.height/2, false)
 	.setRotation(event.target.angle, false)
 	.setScaleX(event.target.scaleX, false)
 	.setScaleY(event.target.scaleY);
-	console.log(pwentk.getSprite(event.target.id), event.target);
 });
