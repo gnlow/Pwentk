@@ -22,6 +22,8 @@ var pwentkFabric = {
 	spriteToObject:function(sprite){
 		return {
 			id: sprite.id,
+			scaleX: sprite.scaleX,
+			scaleY: sprite.scaleY,
 			left: sprite.x+ canvas.width/2,
 			top: -sprite.y+ canvas.height/2,
 			angle: sprite.rotation,
@@ -49,9 +51,9 @@ pwentk.event.changed = function(sprite){
 
 canvas.on("object:modified", function(event){
 	pwentk.getSprite(event.target.id, "id")
+	.setScaleX(event.target.scaleX, false)
+	.setScaleY(event.target.scaleY, false)
 	.setX(event.target.left- canvas.width/2, false)
 	.setY(-event.target.top+ canvas.height/2, false)
-	.setRotation(event.target.angle, false)
-	.setScaleX(event.target.scaleX, false)
-	.setScaleY(event.target.scaleY);
+	.setRotation(event.target.angle);
 });

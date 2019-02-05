@@ -8,6 +8,8 @@ var pwentk = {
 			this.setVisible(visible || true, false);
 			this.shapes = shapes || [{name:"Sample image",img:this.genImg("http://lorempixel.com/960/540/")}];
 			this.setShape(shapeNumber || 0, false);
+			this.setScaleX(scaleX || 1, false);
+			this.setScaleY(scaleY || 1, false);
 			this.setX(x || 0, false);
 			this.setY(y || 0, false);
 			this.setZ(z || 0, false);
