@@ -10,9 +10,14 @@ fabric.Object.prototype.transparentCorners = false;
 var pwentkFabric = {
 	newSprite:function(sprite){
 		let spriteImg = sprite.getShape().img;
-		spriteImg.onload = function(){
+		if(sprite.getShape().loaded){
 			canvas.add(new fabric.Image(spriteImg, pwentkFabric.spriteToObject(sprite)));
-		};
+		}else{
+			spriteImg.onload = function(){
+				canvas.add(new fabric.Image(spriteImg, pwentkFabric.spriteToObject(sprite)));
+				sprite.getShape().loaded = true;
+			};
+		}
 	},
 	spriteToObject:function(sprite){
 		return {
@@ -37,7 +42,6 @@ pwentk.event.changed = function(sprite){
 			canvas.remove(targetObject);
 		}
 	}else if(sprite.visible){
-		console.log("d1");
 		pwentkFabric.newSprite(sprite);
 	}
 	canvas.renderAll();
