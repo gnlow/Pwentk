@@ -10,19 +10,66 @@
 	<script src="pwentk.js"></script>
 	<style>
 	body{
-		padding: 5px;
-		padding-top: 0px;
+	}
+	#app{
+		padding: 20px;
+	}
+	.canvas-container canvas{
+		box-shadow: 0 0 30px black;
+		/*border: 1.5px solid;*/
+		border-radius: 10px;
+	}
+	.topbar{
+		background-color: #eb58ab !important;
+		border-radius:0 !important;
+		margin:0px 0 -10px 0 !important;
+	}
+	#topbar div{
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+	}
+	#scene a{
+		padding-top: 0 !important;
 	}
 </style>
 </head>
 <body>
-	<div class="ui large secondary inverted blue menu">
+	<div id="topbar" class="ui borderless inverted menu topbar">
 		<div class="item">
-			Pwentk
+			<img class="ui tiny image" src="logo.svg" style="fill:white;">
+		</div>
+		<div class="right menu">
+			<div class="item">
+				Lorem!
+			</div>
 		</div>
 	</div>
-	<div id="app">
-		<canvas id="mainCanvas" style="border:1px solid #000000;"></canvas>
+	<div class="ui inverted segment topbar" style="padding:0 5px 10px 5px;">
+		<div id="scene" class="ui secondary pointing inverted menu" style="border:0;">
+			<a class="active item">
+				장면 1
+			</a>
+			<a class="item">
+				장면 2
+			</a>
+			<a class="item">
+				<i class="plus icon"></i>
+			</a>
+		</div>
+	</div>
+	<div id="app" class="ui stackable two column grid">
+		<div class="column">
+			<div id="canvases">
+				<canvas id="mainCanvas" height="360" width="640"></canvas>
+			</div>
+		</div>
+		<div class="column">
+			황금시대의 천하를 청춘의 것이다. 생명을 수 풀이 것은 그들의 피는 봄날의 따뜻한 피다. 밝은 같은 없으면, 기쁘며. 무엇을 이성은 아니다. 되려니와. 힘있다, 얼마나 할지라도 가는 못하다 곳이 보배를 위하여서.
+
+			위하여. 심장은 타오르고 속에 얼마나 대한 있다, 발휘하기 것이다. 대중을 어디 그들의 그들은 황금시대다. 눈에 불러 있음으로써 많이 따뜻한 하는 약동하다, 천자만홍이 품었기 청춘이 끓는 않는 끓는다, 쓸쓸하랴? 되는 바로 있음으로써 것이다. 구할 황금시대의 풀밭에 미묘한 옷을 뿐이다.
+
+			주는 이상. 같은 구하지 봄바람이다. 기쁘며. 황금시대의 것이 그들은 있으랴? 거친 같으며, 길을 과실이 굳세게 설레는 그들의 것이다. 피고, 장식하는 이상의 말이다. 이상 눈에 있으며.
+		</div>
 	</div>
 	<script>
 		var app = new Vue({
