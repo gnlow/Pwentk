@@ -2,6 +2,7 @@
 /* globals pwentk */
 var canvas = new fabric.Canvas("mainCanvas");
 canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
+
 fabric.Object.prototype.cornerSize = 30;
 fabric.Object.prototype.transparentCorners = false;
 fabric.Object.prototype.borderScaleFactor = 5;
