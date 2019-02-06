@@ -6,7 +6,7 @@ var pwentk = {
 			this.id = Math.random().toString(36).substr(2, 5);
 			this.setName(name, false);
 			this.setVisible(visible || true, false);
-			this.shapes = shapes || [{name:"Sample image",img:this.genImg("http://lorempixel.com/960/540/")}];
+			this.shapes = shapes || [{name:"Sample image",img:this.genImg("https://playentry.org/lib/entry-js/images/media/entrybot1.png")}];
 			this.setShape(shapeNumber || 0, false);
 			this.setScaleX(scaleX || 1, false);
 			this.setScaleY(scaleY || 1, false);

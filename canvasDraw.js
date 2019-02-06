@@ -2,8 +2,12 @@
 /* globals pwentk */
 var canvas = new fabric.Canvas("mainCanvas");
 canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
-fabric.Object.prototype.cornerSize =30;
+fabric.Object.prototype.cornerSize = 30;
 fabric.Object.prototype.transparentCorners = false;
+fabric.Object.prototype.borderScaleFactor = 5;
+fabric.Object.prototype.rotatingPointOffset = 120;
+fabric.Object.prototype.borderColor = "rgba(235,88,171,0.75)";
+fabric.Object.prototype.cornerColor = "rgba(235,88,171,0.75)";
 
 var pwentkFabric = {
 	newSprite:function(sprite){
