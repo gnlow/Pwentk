@@ -165,6 +165,23 @@ var pwentk = {
 		}
 
 	},
+	Block: class{
+		constructor(name, text, shape, func){
+			if(name&&text&&shape&&func){
+				this.name = name;
+				this.text = text;
+				this.shape = shape;
+				this.func = func;
+				this.param = {};
+				this.paramNames = this.text.match(/(?<=\(\()(.*?)(?=\)\))/g);
+				for(var i=0;i<this.paramNames.length;i++){
+					this.param[this.paramNames[i]] = 0;
+				}
+			}else{
+				pwentk.genErr(20);
+			}
+		}
+	},
 	genErr: function(errCode, errSprite){
 		if(errSprite){
 			console.warn(new Error(`"${errSprite.name}" 스프라이트에서 에러 #${errCode} : "${pwentk.errorCode[errCode]}"`));

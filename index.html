@@ -2,11 +2,36 @@
 <meta charset="utf-8">
 <html>
 <head>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	<script src="https://unpkg.com/vue@2.6.2/dist/vue.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.6.0/fabric.js"></script>
 	<script src="pwentk.js"></script>
+	<style>
+	body{
+		padding: 5px;
+		padding-top: 0px;
+	}
+</style>
 </head>
 <body>
-	<canvas id="mainCanvas" style="border:1px solid #000000;"></canvas>
+	<div class="ui large secondary inverted blue menu">
+		<div class="item">
+			Pwentk
+		</div>
+	</div>
+	<div id="app">
+		<canvas id="mainCanvas" style="border:1px solid #000000;"></canvas>
+	</div>
+	<script>
+		var app = new Vue({
+			el: "#app",
+			data: {
+
+			}
+		})
+	</script>
 	<script src="canvasDraw.js"></script>
 </body>
 </html>
