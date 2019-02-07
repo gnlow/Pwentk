@@ -77,6 +77,7 @@
 		function canvasResize(){
 			canvas.setWidth($("#canvases").parent().width());
 			canvas.setHeight($("#canvases").parent().width()/16*9);
+			canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
 		}
 		var app = new Vue({
 			el: "#app",
