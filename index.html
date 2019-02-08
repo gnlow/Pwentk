@@ -2,13 +2,23 @@
 <meta charset="utf-8">
 <html>
 <head>
+	<!-- jQuery -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<!-- Semantic-UI -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+	<!-- Draggable -->
+	<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
+	<!-- Vue -->
 	<script src="https://unpkg.com/vue@2.6.2/dist/vue.js"></script>
+	<!-- FabricJS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.6.0/fabric.js"></script>
+	<!-- Pwentk -->
 	<script src="pwentk.js"></script>
+	<script src="editor.js"></script>
+	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700,900" rel="stylesheet">
+
 	<style>
 	body{
 		font-family: "Lato", "Noto Sans KR", sans-serif;
@@ -34,6 +44,22 @@
 	}
 	#scene a{
 		padding-top: 0 !important;
+	}
+	.block{
+		stroke-width:0.3px;
+		stroke-linecap:butt;
+	}
+	.basic{
+		fill:#6691e8; 
+		stroke:#81a7f4;
+	}
+	.blockGroup{
+		transform:scale(10);
+
+	}
+	.blockText{ 
+		font: 6px sans-serif; 
+		fill: auto;
 	}
 </style>
 </head>
@@ -75,6 +101,9 @@
 					Hello
 					How are you?
 					프랑스
+					<br>
+					<svg class="ws" id="ws" style="width:100%;height:100%;">
+					</svg>
 				</div>
 			</div>
 		</div>
