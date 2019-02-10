@@ -7,8 +7,6 @@
 	<!-- Semantic-UI -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-	<!-- Draggable -->
-	<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
 	<!-- Vue -->
 	<script src="https://unpkg.com/vue@2.6.2/dist/vue.js"></script>
 	<!-- FabricJS -->
@@ -117,7 +115,7 @@
 		}
 
 		var block = Vue.component("pwentk-block",{
-			template: `<g class="draggable blockGroup">
+			template: `<g class="draggable blockGroup" @mousedown="dragStart()">
 			<path class="basic block" 
 			:d="getPath(text)"/>
 			<text class="blockText" x="7.5" y="7">{{text}}</text>
@@ -143,7 +141,8 @@
 					H 6 
 					A 1 1 90 0 0 5 11 
 					V 15 L 0 10 L 0 0 Z`;
-				}
+				},
+				log: console.log
 			}
 		});
 		var app = new Vue({
@@ -164,6 +163,7 @@
 		});
 		window.addEventListener("resize", canvasResize);
 		$(canvasResize);
+		
 	</script>
 	<script src="canvasDraw.js"></script>
 </body>
