@@ -15,7 +15,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.6.0/fabric.js"></script>
 	<!-- Pwentk -->
 	<script src="pwentk.js"></script>
-	<script src="editor.js"></script>
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700,900" rel="stylesheet">
 
@@ -58,13 +57,13 @@
 
 	}
 	.blockText{ 
-		font: 6px sans-serif; 
+		font: 6px "Lato", "Noto Sans KR", sans-serif; 
 		fill: auto;
 	}
 </style>
 </head>
 <body>
-	<div id="app">
+	<div id="app" style="height: 100%;">
 		<div id="topbar" class="ui borderless inverted menu topbar">
 			<div class="item">
 				<img class="ui tiny image" src="logo.svg" style="fill:white;">
@@ -85,14 +84,14 @@
 				</a>
 			</div>
 		</div>
-		<div id="main" class="ui stackable two column grid">
+		<div id="main" class="ui stackable two column grid" style="height: 100%;">
 			<div class="column">
 				<div id="canvases">
 					<canvas id="mainCanvas" height="360" width="640"></canvas>
 				</div>
 			</div>
 			<div class="column">
-				<div class="ui segment">
+				<div class="ui segment" style="height: 100%;">
 					ㅇㅅㅇ
 					안녕하시오
 					Hello, World!
@@ -103,6 +102,8 @@
 					프랑스
 					<br>
 					<svg class="ws" id="ws" style="width:100%;height:100%;">
+						<pwentk-block text="안">
+						</pwentk-block>
 					</svg>
 				</div>
 			</div>
@@ -114,6 +115,37 @@
 			canvas.setHeight($("#canvases").parent().width()/16*9);
 			canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
 		}
+
+		var block = Vue.component("pwentk-block",{
+			template: `<g class="draggable blockGroup">
+			<path class="basic block" 
+			:d="getPath(text)"/>
+			<text class="blockText" x="7.5" y="7">{{text}}</text>
+			</g>`,
+			props:["text"],
+			data(){
+				return {tex:"test"}
+			},
+			methods:{
+				getTextWidth: function(text, font) {
+					console.log(text);
+					var canvas = this.getTextWidth.canvas || (this.getTextWidth.canvas = document.createElement("canvas"));
+					var context = canvas.getContext("2d");
+					context.font = font;
+					var metrics = context.measureText(text);
+					return metrics.width*0.6;
+				},
+				getPath: function(text){
+					return `M0 0 L 5 5 V 1 
+					A 1 1 90 0 1 6 0  
+					h ${this.getTextWidth(text,"6px 'Lato', 'Noto Sans KR', sans-serif")}
+					a 5 5 180 0 1 0 10 
+					H 6 
+					A 1 1 90 0 0 5 11 
+					V 15 L 0 10 L 0 0 Z`;
+				}
+			}
+		});
 		var app = new Vue({
 			el: "#app",
 			data: {

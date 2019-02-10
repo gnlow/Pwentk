@@ -1,3 +1,4 @@
+/*
 $(function(){
 	newBlock({
 		class:"basic",
@@ -5,6 +6,7 @@ $(function(){
 		font:"6px sans-serif"
 	})
 });
+*/
 
 function xyRound(obj){
 	return {x:Math.round(obj.x),y:Math.round(obj.y)}
