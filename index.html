@@ -11,6 +11,8 @@
 	<script src="https://unpkg.com/vue@2.6.2/dist/vue.js"></script>
 	<!-- FabricJS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.6.0/fabric.js"></script>
+	<!-- interact.js -->
+	<script src="https://cdn.jsdelivr.net/npm/interactjs@1.3.4/dist/interact.min.js"></script>
 	<!-- Pwentk -->
 	<script src="pwentk.js"></script>
 	<!-- Fonts -->
@@ -104,11 +106,7 @@
 			scale: 3
 		};
 		var block = Vue.component("pwentk-block",{
-			template: `<g :class="['draggable', 'blockGroup', {clicked: clicked}]" 
-			@mousedown="dragStart" 
-			@mousemove="dragMove" 
-			@mouseout="dragMove"
-			@mouseup="dragEnd" 
+			template: `<g :class="['draggable', 'blockGroup', {clicked: clicked}]"
 			:style="{transform:'translate('+x+'px,'+y+'px) scale('+ws.scale+')'}">
 			<path class="basic block" 
 			:d="getPath(text)"/>
@@ -124,6 +122,20 @@
 					beforeY:0,
 					ws:ws
 				}
+			},
+			created(){
+				interact(".draggable")
+				.draggable({
+					inertia: true,
+					restrict: {
+						restriction: "parent",
+						endOnly: true
+					},
+					autoScroll: true,
+					onstart: this.dragStart,
+					onmove: this.dragMove,
+					onend: this.dragEnd
+				})
 			},
 			methods:{
 				getTextWidth: function(text, font) {
