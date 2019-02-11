@@ -172,11 +172,17 @@ var pwentk = {
 				this.text = text;
 				this.shape = shape;
 				this.func = func;
-				this.param = {};
-				this.paramNames = this.text.match(/(?<=\(\()(.*?)(?=\)\))/g);
-				for(var i=0;i<this.paramNames.length;i++){
-					this.param[this.paramNames[i]] = 0;
-				}
+				this.param = 
+				pwentk.nArray(this.text.match(/(?<=\(\()(.*?)(?=\)\))/g))
+				.map(name => ({name: name, type: "string", data: "0"}))
+				.concat(
+					pwentk.nArray(this.text.match(/(?<=\<\<)(.*?)(?=\>\>)/g))
+					.map(name => ({name: name, type: "boolean", data: true}))
+					)
+				.concat(
+					pwentk.nArray(this.text.match(/(?<=\{\{)(.*?)(?=\}\})/g))
+					.map(name => ({name: name, type: "function", data: function(){}}))
+					);
 			}else{
 				pwentk.genErr(20);
 			}
@@ -226,5 +232,6 @@ var pwentk = {
 				break;
 			}
 		}
-	}
+	},
+	nArray: arr => arr?arr:[]
 };

@@ -50,10 +50,6 @@
 		fill:#6691e8; 
 		stroke:#81a7f4;
 	}
-	.blockGroup{
-		transform:scale(10);
-
-	}
 	.blockText{ 
 		font: 6px "Lato", "Noto Sans KR", sans-serif; 
 		fill: auto;
@@ -90,17 +86,8 @@
 			</div>
 			<div class="column">
 				<div class="ui segment" style="height: 100%;">
-					ㅇㅅㅇ
-					안녕하시오
-					Hello, World!
-					테스트 중이올시다.
-					그리고, 말일세?
-					Hello
-					How are you?
-					프랑스
-					<br>
 					<svg class="ws" id="ws" style="width:100%;height:100%;">
-						<pwentk-block text="안">
+						<pwentk-block text="테스트">
 						</pwentk-block>
 					</svg>
 				</div>
@@ -113,16 +100,30 @@
 			canvas.setHeight($("#canvases").parent().width()/16*9);
 			canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
 		}
-
+		var ws = {
+			scale: 3
+		};
 		var block = Vue.component("pwentk-block",{
-			template: `<g class="draggable blockGroup" @mousedown="dragStart()">
+			template: `<g :class="['draggable', 'blockGroup', {clicked: clicked}]" 
+			@mousedown="dragStart" 
+			@mousemove="dragMove" 
+			@mouseout="dragMove"
+			@mouseup="dragEnd" 
+			:style="{transform:'translate('+x+'px,'+y+'px) scale('+ws.scale+')'}">
 			<path class="basic block" 
 			:d="getPath(text)"/>
 			<text class="blockText" x="7.5" y="7">{{text}}</text>
 			</g>`,
 			props:["text"],
 			data(){
-				return {tex:"test"}
+				return {
+					x:0, 
+					y:0,
+					clicked:false,
+					beforeX:0,
+					beforeY:0,
+					ws:ws
+				}
 			},
 			methods:{
 				getTextWidth: function(text, font) {
@@ -142,7 +143,28 @@
 					A 1 1 90 0 0 5 11 
 					V 15 L 0 10 L 0 0 Z`;
 				},
-				log: console.log
+				log: console.log,
+				dragStart: function(e){
+					this.clicked = true;
+					this.beforeX = e.clientX;
+					this.beforeY = e.clientY;
+					console.log("drag srart!",e.clientX,e.clientY);
+				},
+				dragMove: function(e){
+					if(this.clicked){
+						this.x += e.clientX - this.beforeX;
+						this.y += e.clientY - this.beforeY;
+						this.beforeX = e.clientX;
+						this.beforeY = e.clientY;
+						console.log("moving",e.clientX,e.clientY);
+					}
+				},
+				dragEnd: function(e){
+					this.clicked = false;
+					this.x += e.clientX - this.beforeX;
+					this.y += e.clientY - this.beforeY;
+					console.log("drag end!",e.clientX,e.clientY);
+				}
 			}
 		});
 		var app = new Vue({
@@ -150,7 +172,10 @@
 			data: {
 				scenes: [
 				{name: "장면 1", active: true}
-				]
+				],
+				ws: {
+					scale: 10
+				}
 			},
 			methods: {
 				sceneChange: function(selectScene){
