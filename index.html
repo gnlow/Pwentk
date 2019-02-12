@@ -90,7 +90,7 @@
 			<div class="column">
 				<div class="ui segment" style="height: 100%;">
 					<svg class="ws" id="ws" style="width:100%;height:100%;">
-						<component v-for="block in blocks" is="pwentk-block" :path="block.getPath()" text="안녕"></component>
+						<component v-for="block in blocks" is="pwentk-block" :path="block.getPath()" :text="block.text"></component>
 					</svg>
 				</div>
 			</div>
@@ -103,7 +103,7 @@
 			canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
 		}
 		var ws = {
-			scale: 10
+			scale: 2
 		};
 		var block = Vue.component("pwentk-block",{
 			template: `<g :class="['draggable', 'blockGroup', {clicked: clicked}]"
@@ -193,9 +193,6 @@
 				scenes: [
 				{name: "장면 1", active: true}
 				],
-				ws: {
-					scale: 10
-				},
 				blocks: []
 			},
 			methods: {
