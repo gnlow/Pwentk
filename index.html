@@ -53,8 +53,9 @@
 		stroke:#81a7f4;
 	}
 	.blockText{ 
-		font: 6px "Lato", "Noto Sans KR", sans-serif; 
+		font: 6px "Lato", "Noto Sans KR", sans-serif;
 		fill: auto;
+		user-select: none;
 	}
 </style>
 </head>
@@ -109,7 +110,7 @@
 			template: `<g :class="['draggable', 'blockGroup', {clicked: clicked}]"
 			:style="{transform:'translate('+x+'px,'+y+'px) scale('+ws.scale+')'}">
 			<path class="basic block" 
-			:d="getPath(text)"/>
+			:d="path"/>
 			<text class="blockText" x="7.5" y="7">{{text}}</text>
 			</g>`,
 			props:["text"],
@@ -120,10 +121,12 @@
 					clicked:false,
 					beforeX:0,
 					beforeY:0,
-					ws:ws
+					ws:ws,
+					path: ""
 				}
 			},
 			created(){
+				this.path = this.getPath(this.text);
 				interact(".draggable")
 				.draggable({
 					inertia: true,
@@ -139,7 +142,6 @@
 			},
 			methods:{
 				getTextWidth: function(text, font) {
-					console.log(text);
 					var canvas = this.getTextWidth.canvas || (this.getTextWidth.canvas = document.createElement("canvas"));
 					var context = canvas.getContext("2d");
 					context.font = font;
@@ -160,7 +162,6 @@
 					this.clicked = true;
 					this.beforeX = e.clientX;
 					this.beforeY = e.clientY;
-					console.log("drag srart!",e.clientX,e.clientY);
 				},
 				dragMove: function(e){
 					if(this.clicked){
@@ -168,14 +169,12 @@
 						this.y += e.clientY - this.beforeY;
 						this.beforeX = e.clientX;
 						this.beforeY = e.clientY;
-						console.log("moving",e.clientX,e.clientY);
 					}
 				},
 				dragEnd: function(e){
 					this.clicked = false;
 					this.x += e.clientX - this.beforeX;
 					this.y += e.clientY - this.beforeY;
-					console.log("drag end!",e.clientX,e.clientY);
 				}
 			}
 		});
