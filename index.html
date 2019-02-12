@@ -104,7 +104,7 @@
 			canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
 		}
 		var ws = {
-			scale: 3
+			scale: 10
 		};
 		var block = Vue.component("pwentk-block",{
 			template: `<g :class="['draggable', 'blockGroup', {clicked: clicked}]"
@@ -149,6 +149,7 @@
 					return metrics.width*0.6;
 				},
 				getPath: function(text){
+					/*
 					return `M0 0 L 5 5 V 1 
 					A 1 1 90 0 1 6 0  
 					h ${this.getTextWidth(text,"6px 'Lato', 'Noto Sans KR', sans-serif")}
@@ -156,6 +157,16 @@
 					H 6 
 					A 1 1 90 0 0 5 11 
 					V 15 L 0 10 L 0 0 Z`;
+					*/
+					return `M0 0 l 5 5 v -4 
+					a 1 1 90 0 1 1 -1  
+					h 20
+					a 5 5 180 0 1 0 10 
+					H 11 
+					a 1 1 90 0 0 -1 1 
+					v 4 l -5 -5
+					H 5 
+					v 5 l -5 -5 Z`;
 				},
 				log: console.log,
 				dragStart: function(e){

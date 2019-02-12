@@ -166,11 +166,10 @@ var pwentk = {
 
 	},
 	Block: class{
-		constructor(name, text, shape, func){
-			if(name&&text&&shape&&func){
+		constructor(name, text, func){
+			if(name&&text&&func){
 				this.name = name;
 				this.text = text;
-				this.shape = shape;
 				this.func = func;
 				this.param = 
 				pwentk.nArray(this.text.match(/(?<=\(\()(.*?)(?=\)\))/g))
