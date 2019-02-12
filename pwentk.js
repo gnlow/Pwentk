@@ -168,17 +168,17 @@ var pwentk = {
 	BlockSet: class{
 		constructor(options){
 			this.name = options.name;
-			this.text = options.text;
+			this.template = options.template;
 			this.func = options.func;
 			this.param = 
-			pwentk.nArray(this.text.match(/(?<=\(\()(.*?)(?=\)\))/g))
+			pwentk.nArray(this.template.match(/(?<=\(\()(.*?)(?=\)\))/g))
 			.map(name => ({name: name, type: "string", data: "0"}))
 			.concat(
-				pwentk.nArray(this.text.match(/(?<=\<\<)(.*?)(?=\>\>)/g))
+				pwentk.nArray(this.template.match(/(?<=\<\<)(.*?)(?=\>\>)/g))
 				.map(name => ({name: name, type: "boolean", data: true}))
 				)
 			.concat(
-				pwentk.nArray(this.text.match(/(?<=\{\{)(.*?)(?=\}\})/g))
+				pwentk.nArray(this.template.match(/(?<=\{\{)(.*?)(?=\}\})/g))
 				.map(name => ({name: name, type: "function", data: function(){}}))
 				);
 		}
@@ -186,7 +186,7 @@ var pwentk = {
 	Block: class{
 		constructor(parent){
 			this.name = parent.name;
-			this.text = parent.text;
+			this.template = parent.template;
 			this.param = parent.param;
 			this.innerBlock = this.param.filter(val=>val.type=="function")
 		}
@@ -194,7 +194,7 @@ var pwentk = {
 			var output = "";
 			output += `M0 0 l 5 5 v -4 
 			a 1 1 90 0 1 1 -1  
-			h 20
+			h 70
 			a 5 5 180 0 1 0 10 `;
 			output += `H 11 `;
 
