@@ -90,8 +90,7 @@
 			<div class="column">
 				<div class="ui segment" style="height: 100%;">
 					<svg class="ws" id="ws" style="width:100%;height:100%;">
-						<pwentk-block text="테스트">
-						</pwentk-block>
+						<component v-for="block in blocks" is="pwentk-block" :path="block.getPath()" text="안녕"></component>
 					</svg>
 				</div>
 			</div>
@@ -113,7 +112,7 @@
 			:d="path"/>
 			<text class="blockText" x="7.5" y="7">{{text}}</text>
 			</g>`,
-			props:["text"],
+			props:["text", "path"],
 			data(){
 				return {
 					x:0, 
@@ -121,12 +120,11 @@
 					clicked:false,
 					beforeX:0,
 					beforeY:0,
-					ws:ws,
-					path: ""
+					ws:ws
 				}
 			},
 			created(){
-				this.path = this.getPath(this.text);
+				//this.path = this.getPath(this.text);
 				interact(".draggable")
 				.draggable({
 					inertia: true,
@@ -197,7 +195,8 @@
 				],
 				ws: {
 					scale: 10
-				}
+				},
+				blocks: []
 			},
 			methods: {
 				sceneChange: function(selectScene){

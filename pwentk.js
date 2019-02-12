@@ -165,7 +165,7 @@ var pwentk = {
 		}
 
 	},
-	Block: class{
+	BlockSet: class{
 		constructor(name, text, func){
 			if(name&&text&&func){
 				this.name = name;
@@ -185,6 +185,22 @@ var pwentk = {
 			}else{
 				pwentk.genErr(20);
 			}
+		}
+	},
+	Block: class{
+		constructor(parent){
+
+		}
+		getPath(text){
+			return `M0 0 l 5 5 v -4 
+					a 1 1 90 0 1 1 -1  
+					h 20
+					a 5 5 180 0 1 0 10 
+					H 11 
+					a 1 1 90 0 0 -1 1 
+					v 4 l -5 -5
+					H 5 
+					v 5 l -5 -5 Z`;
 		}
 	},
 	genErr: function(errCode, errSprite){
