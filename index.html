@@ -122,18 +122,18 @@
 				}
 			},
 			created(){
-				//this.path = this.getPath(this.text);
 				interact(`#ws > g:nth-child(${this.index+1})`)
 				.draggable({
 					inertia: true,
+					snap:{
+						//targets:[{x:0, y:0}]
+					},
 					restrict: {
 						restriction: "parent",
 						endOnly: true
 					},
 					autoScroll: true,
-					onstart: this.dragStart,
-					onmove: this.dragMove,
-					onend: this.dragEnd
+					onmove: this.dragMove
 				})
 			},
 			methods:{
@@ -144,45 +144,10 @@
 					var metrics = context.measureText(text);
 					return metrics.width*0.6;
 				},
-				getPath: function(text){
-					/*
-					return `M0 0 L 5 5 V 1 
-					A 1 1 90 0 1 6 0  
-					h ${this.getTextWidth(text,"6px 'Lato', 'Noto Sans KR', sans-serif")}
-					a 5 5 180 0 1 0 10 
-					H 6 
-					A 1 1 90 0 0 5 11 
-					V 15 L 0 10 L 0 0 Z`;
-					*/
-					return `M0 0 l 5 5 v -4 
-					a 1 1 90 0 1 1 -1  
-					h 20
-					a 5 5 180 0 1 0 10 
-					H 11 
-					a 1 1 90 0 0 -1 1 
-					v 4 l -5 -5
-					H 5 
-					v 5 l -5 -5 Z`;
-				},
 				log: console.log,
-				dragStart: function(e){
-					app.lastClick = this.index;
-					this.clicked = true;
-					this.beforeX = e.clientX;
-					this.beforeY = e.clientY;
-				},
 				dragMove: function(e){
-					if(this.clicked){
-						this.x += e.clientX - this.beforeX;
-						this.y += e.clientY - this.beforeY;
-						this.beforeX = e.clientX;
-						this.beforeY = e.clientY;
-					}
-				},
-				dragEnd: function(e){
-					this.clicked = false;
-					this.x += e.clientX - this.beforeX;
-					this.y += e.clientY - this.beforeY;
+					this.x += e.dx;
+					this.y += e.dy;
 				}
 			}
 		});
