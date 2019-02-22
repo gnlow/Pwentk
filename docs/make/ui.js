@@ -1,3 +1,5 @@
+import App from "app";
+
 Vue.use(SemanticUIVue);
 function canvasResize(){
 	var canvasParent = document.getElementById("canvases").parentNode;
@@ -71,6 +73,8 @@ var block = Vue.component("pwentk-block",{
 });
 var app = new Vue({
 	el: "#app",
+	template: "<App/>",
+	components: { App }
 	data: {
 		scenes: [
 		"장면 1"
