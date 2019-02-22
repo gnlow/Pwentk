@@ -2,13 +2,12 @@
 <meta charset="utf-8">
 <html>
 <head>
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<!-- Semantic-UI -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 	<!-- Vue -->
 	<script src="https://unpkg.com/vue@2.6.2/dist/vue.js"></script>
+	<!-- Semantic-UI-Vue -->
+	<script src="https://unpkg.com/semantic-ui-vue/dist/umd/semantic-ui-vue.min.js"></script>
 	<!-- FabricJS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.6.0/fabric.js"></script>
 	<!-- interact.js -->
@@ -57,43 +56,52 @@
 		fill: auto;
 		user-select: none;
 	}
+	#main{
+		padding: 10px;
+	}
 </style>
 </head>
 <body>
 	<div id="app" style="height: 100%;">
-		<div id="topbar" class="ui borderless inverted menu topbar">
-			<div class="item">
-				<img class="ui tiny image" src="logo.svg" style="fill:white;">
-			</div>
-			<div class="right menu">
-				<div class="item">
-					Lorem!
-				</div>
-			</div>
-		</div>
-		<div class="ui inverted segment topbar" style="padding:0 5px 10px 5px;">
-			<div id="scene" class="ui secondary pointing inverted menu" style="border:0;">
-				<a class="item" :class="{'active':scene.active}" @click="sceneChange(index);" v-for="(scene, index) in scenes">
-					{{scene.name}}
+		<sui-menu borderless inverted>
+			<a is="sui-menu-item">
+				<sui-image src="logo.svg" size="tiny" style="fill:white;">
 				</a>
-				<a class="item" @click="scenes.push({name: '장면 ' + (scenes.length+1), active: false})">
-					<i class="plus icon"></i>
+				<sui-menu-menu position="right">
+					<a is="sui-menu-item">
+						Lorem!
+					</a>
+				</sui-menu-menu>
+			</sui-menu>
+			<sui-segment inverted>
+				<sui-menu secondary pointing inverted>
+					<a is="sui-menu-item" 
+					v-for="(scene, index) in scenes"
+					:active="activeScene == index" 
+					:content="scene"
+					@click="activeScene = index"
+					/>
+					<a is="sui-menu-item"
+					@click="newScene()">
+					<sui-icon name="plus"/>
 				</a>
-			</div>
-		</div>
-		<div id="main" class="ui stackable two column grid" style="height: 100%;">
-			<div class="column">
-				<div id="canvases">
-					<canvas id="mainCanvas" height="360" width="640"></canvas>
-				</div>
-			</div>
-			<div class="column">
-				<div class="ui segment" style="height: 100%;">
-					<svg class="ws" id="ws" style="width:100%;height:100%;">
-						<component v-for="(block, index) in blocks" is="pwentk-block" :path="block.getPath()" :key="index" :text="block.template" :index="index"></component>
-					</svg>
-				</div>
-			</div>
+			</sui-menu>
+		</sui-segment>
+		<div id="main">
+			<sui-grid :columns="2" stackable>
+				<sui-grid-column>
+					<div id="canvases">
+						<canvas id="mainCanvas" height="360" width="640"></canvas>
+					</div>
+				</sui-grid-column>
+				<sui-grid-column>
+					<sui-segment>
+						<svg class="ws" id="ws" style="width:100%;height:100%;">
+							<component v-for="(block, index) in blocks" is="pwentk-block" :path="block.getPath()" :key="index" :text="block.template" :index="index"></component>
+						</svg>
+					</sui-segment>
+				</sui-grid-column>
+			</sui-grid>
 		</div>
 	</div>
 	<script src="ui.js"></script>
