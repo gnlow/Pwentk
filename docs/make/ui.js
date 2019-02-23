@@ -1,7 +1,7 @@
 Vue.use(SemanticUIVue);
 function canvasResize(){
 	var canvasParent = document.getElementById("canvases").parentNode;
-	var canvasWidth = canvasParent.offsetWidth-window.getComputedStyle(canvasParent).getPropertyValue("padding").replace("px", "")*2;
+	var canvasWidth = canvasParent.offsetWidth-28;//window.getComputedStyle(canvasParent).getPropertyValue("padding").replace("px", "")*2;
 	canvas.setWidth(canvasWidth);
 	canvas.setHeight(canvasWidth/16*9);
 	canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
