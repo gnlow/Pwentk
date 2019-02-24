@@ -1,5 +1,6 @@
 Vue.use(SemanticUIVue);
 function canvasResize(){
+	app.topMargin = document.getElementById("topbar").clientHeight+"px";
 	var canvasParent = document.getElementById("canvases").parentNode;
 	var canvasWidth = canvasParent.offsetWidth-28;//window.getComputedStyle(canvasParent).getPropertyValue("padding").replace("px", "")*2;
 	canvas.setWidth(canvasWidth);
@@ -80,7 +81,8 @@ var app = new Vue({
 		ws: {
 			scale: 2
 		},
-		lastClick: undefined
+		lastClick: undefined,
+		topMargin: "0px"
 	},
 	methods: {
 		newScene(){

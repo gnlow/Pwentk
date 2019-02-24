@@ -36,10 +36,10 @@
 		border-radius:0 !important;
 		margin:0px 0 -10px 0 !important;
 	}
-	#topbar div{
+	/*#topbar div{
 		padding-top: 0 !important;
 		padding-bottom: 0 !important;
-	}
+	}*/
 	#scene a{
 		padding-top: 0 !important;
 	}
@@ -63,7 +63,7 @@
 </head>
 <body>
 	<div id="app" style="height: 100%;">
-		<sui-menu fixed borderless inverted style="display:block">
+		<sui-menu fixed borderless inverted style="display:block" id="topbar">
 			<sui-container>
 				<a is="sui-menu-item">
 					<sui-image src="../logo.svg" size="tiny" style="fill:white;"/>
@@ -75,7 +75,6 @@
 				</sui-menu-menu>
 			</sui-container>
 			<sui-container>
-				<sui-segment inverted>
 					<sui-menu secondary pointing inverted>
 						<a is="sui-menu-item" 
 						v-for="(scene, index) in scenes"
@@ -88,10 +87,9 @@
 						<sui-icon name="plus"/>
 					</a>
 				</sui-menu>
-			</sui-segment>
 		</sui-menu>
 	</sui-segment>
-	<div id="main">
+	<div id="main" :style="{'margin-top': topMargin}">
 		<sui-grid :columns="2" stackable>
 			<sui-grid-row stretched>
 				<sui-grid-column :width="6">
