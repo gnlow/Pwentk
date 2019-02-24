@@ -31,19 +31,7 @@
 	#mainCanvas{
 		border: 1px solid rgba(34,36,38,.15);
 		box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
-		
-	}
-	.topbar{
-		background-color: #eb58ab !important;
-		border-radius:0 !important;
-		margin:0px 0 -10px 0 !important;
-	}
-	/*#topbar div{
-		padding-top: 0 !important;
-		padding-bottom: 0 !important;
-	}*/
-	#scene a{
-		padding-top: 0 !important;
+		background-color: white;
 	}
 	.block{
 		stroke-width:0.3px;
@@ -60,8 +48,8 @@
 	}
 </style>
 </head>
-<body>
-	<div id="app" style="height: 100%;">
+<body style="height: 0;background: linear-gradient(to right, #eb58ab, #fcd528)">
+	<div id="app">
 		<sui-menu fixed borderless inverted compact style="display:block" id="topbar">
 			<sui-container fluid>
 				<a is="sui-menu-item">
@@ -74,36 +62,36 @@
 				</sui-menu-menu>
 			</sui-container>
 			<sui-container fluid>
-					<sui-menu secondary pointing inverted>
-						<a is="sui-menu-item" 
-						v-for="(scene, index) in scenes"
-						:active="activeScene == index" 
-						:content="scene"
-						@click="activeScene = index"
-						/>
-						<a is="sui-menu-item"
-						@click="newScene()">
-						<sui-icon name="plus"/>
-					</a>
-				</sui-menu>
+				<sui-menu secondary pointing inverted>
+					<a is="sui-menu-item" 
+					v-for="(scene, index) in scenes"
+					:active="activeScene == index" 
+					:content="scene"
+					@click="activeScene = index"
+					/>
+					<a is="sui-menu-item"
+					@click="newScene()">
+					<sui-icon name="plus"/>
+				</a>
+			</sui-menu>
 		</sui-menu>
 	</sui-segment>
-	<div id="main" :style="{'margin-top': topMargin}">
-		<sui-grid :columns="2" stackable>
-			<sui-grid-row stretched>
-				<sui-grid-column :width="6">
-					<div id="canvases">
-						<canvas id="mainCanvas" height="360" width="640"></canvas>
-					</div>
-				</sui-grid-column>
-				<sui-grid-column :width="10">
-					<sui-segment>
-						<svg class="ws" id="ws" style="width:100%;height:100%;">
-							<component v-for="(block, index) in blocks" is="pwentk-block" :path="block.getPath()" :key="index" :text="block.template" :index="index"></component>
-						</svg>
-					</sui-segment>
-				</sui-grid-column>
-			</sui-grid-row>
+	<div id="main" :style="{'margin-top': topMargin, height: mainHeight}">
+		<sui-grid :columns="2" stackable stretched style="height:100%;margin:0;">
+			
+			<sui-grid-column :width="6">
+				<div id="canvases">
+					<canvas id="mainCanvas" height="360" width="640"></canvas>
+				</div>
+			</sui-grid-column>
+			<sui-grid-column :width="10">
+				<sui-segment style="padding: 0;">
+					<svg class="ws" id="ws" style="width:100%;height:100%;">
+						<component v-for="(block, index) in blocks" is="pwentk-block" :path="block.getPath()" :key="index" :text="block.template" :index="index"></component>
+					</svg>
+				</sui-segment>
+			</sui-grid-column>
+			
 		</sui-grid>
 	</div>
 </div>
