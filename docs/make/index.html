@@ -23,13 +23,15 @@
 		font-weight: 400;
 	}
 	#main{
-		padding: 20px;
+		padding: 10px;
 	}
 	.canvas-container canvas{
-		border-radius: 10px;
+		border-radius: .28571429rem;
 	}
 	#mainCanvas{
-		box-shadow: 0 0 10px black;
+		border: 1px solid rgba(34,36,38,.15);
+		box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+		
 	}
 	.topbar{
 		background-color: #eb58ab !important;
@@ -56,15 +58,12 @@
 		fill: auto;
 		user-select: none;
 	}
-	#main{
-		padding: 10px;
-	}
 </style>
 </head>
 <body>
 	<div id="app" style="height: 100%;">
-		<sui-menu fixed borderless inverted style="display:block" id="topbar">
-			<sui-container>
+		<sui-menu fixed borderless inverted compact style="display:block" id="topbar">
+			<sui-container fluid>
 				<a is="sui-menu-item">
 					<sui-image src="../logo.svg" size="tiny" style="fill:white;"/>
 				</a>
@@ -74,7 +73,7 @@
 					</a>
 				</sui-menu-menu>
 			</sui-container>
-			<sui-container>
+			<sui-container fluid>
 					<sui-menu secondary pointing inverted>
 						<a is="sui-menu-item" 
 						v-for="(scene, index) in scenes"
