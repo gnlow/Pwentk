@@ -1,4 +1,7 @@
 Vue.use(SemanticUIVue);
+document.addEventListener('contextmenu', function (e) {
+	e.preventDefault();
+}, false);
 function canvasResize(){
 	app.topMargin = document.getElementById("topbar").clientHeight+"px";
 	app.mainHeight = (window.innerHeight-document.getElementById("topbar").clientHeight)+"px";
@@ -8,7 +11,7 @@ function canvasResize(){
 	canvas.setHeight(canvasWidth/16*9);
 	canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
 }
-var block = Vue.component("pwentk-block",{
+Vue.component("pwentk-block",{
 	template: `<g :class="['draggable', 'blockGroup', {clicked: clicked}, {lastClick: (lastClick==index)}]"
 	:style="{transform:'translate('+x+'px,'+y+'px) scale('+ws.scale+')'}">
 	<path class="basic block" 
@@ -78,17 +81,32 @@ var app = new Vue({
 		"장면 1"
 		],
 		activeScene: 0,
+		targetScene: 0,
 		blocks: [],
 		ws: {
 			scale: 2
 		},
 		lastClick: undefined,
 		topMargin: "0px",
-		mainHeight: "0px"
+		mainHeight: "0px",
+		contextPos: {left: 0, top: 100},
+		context: false
 	},
 	methods: {
 		newScene(){
 			this.scenes.push("장면 "+(this.scenes.length+1))
+		},
+		deleteScene(){
+			this.scenes.splice(this.targetScene, 1);
+		},
+		contextOpen(e, target){
+			this.targetScene = target;
+			this.contextPos.left = e.clientX;
+			this.contextPos.top = e.clientY + 20;
+			this.context = true;
+		},
+		contextClose(e){
+			this.context = false;
 		}
 	}
 });

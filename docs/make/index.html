@@ -50,49 +50,60 @@
 </style>
 </head>
 <body style="height: 0;background: linear-gradient(to right, #eb58ab, #fcd528);background-attachment: fixed;">
-	<div id="app">
-		<sui-menu fixed borderless inverted compact style="display:block" id="topbar">
-			<sui-container fluid>
-				<a is="sui-menu-item">
-					<sui-image src="../logo.svg" size="tiny" style="fill:white;"/>
-				</a>
-				<sui-menu-menu position="right">
-					<a is="sui-menu-item">
-						Lorem!
-					</a>
-				</sui-menu-menu>
-			</sui-container>
-			<sui-container fluid>
-				<sui-menu secondary pointing inverted>
-					<a is="sui-menu-item" 
-					v-for="(scene, index) in scenes"
-					:active="activeScene == index" 
-					:content="scene"
-					@click="activeScene = index"
-					/>
-					<a is="sui-menu-item"
-					@click="newScene()">
-					<sui-icon name="plus"/>
-				</a>
-			</sui-menu>
-		</sui-menu>
-	</sui-segment>
-	<div id="main" :style="{'margin-top': topMargin, height: mainHeight}">
-		<sui-grid :columns="2" stackable stretched style="height:100%;margin:0;">
-			<sui-grid-column :width="6">
-				<div id="canvases">
-					<canvas id="mainCanvas" height="360" width="640"></canvas>
-				</div>
-			</sui-grid-column>
-			<sui-grid-column :width="10" style="min-height:350px;">
-				<sui-segment style="padding: 0;">
-					<svg class="ws" id="ws" style="width:100%;height:100%;">
-						<component v-for="(block, index) in blocks" is="pwentk-block" :path="block.getPath()" :key="index" :text="block.template" :index="index"></component>
-					</svg>
-				</sui-segment>
-			</sui-grid-column>
-		</sui-grid>
-	</div>
+	<div id="app" @click="contextClose">
+		<sui-menu vertical 
+		style="position:absolute;z-index:102;width:auto;" 
+		:style="{left:contextPos.left+'px', top:contextPos.top+'px'}" 
+		v-if="context">
+		<sui-menu-item 
+		@click="deleteScene"
+		>
+		장면 삭제하기
+	</sui-menu-item>
+</sui-menu>
+<sui-menu fixed borderless inverted compact style="display:block" id="topbar">
+	<sui-container fluid>
+		<a is="sui-menu-item">
+			<sui-image src="../logo.svg" size="tiny" style="fill:white;"/>
+		</a>
+		<sui-menu-menu position="right">
+			<a is="sui-menu-item">
+				Lorem!
+			</a>
+		</sui-menu-menu>
+	</sui-container>
+	<sui-container fluid>
+		<sui-menu secondary pointing inverted>
+			<a is="sui-menu-item" 
+			v-for="(scene, index) in scenes"
+			:active="activeScene == index" 
+			:content="scene"
+			@click.left="activeScene = index"
+			@click.right="contextOpen($event, index)"
+			/>
+			<a is="sui-menu-item"
+			@click="newScene">
+			<sui-icon name="plus"/>
+		</a>
+	</sui-menu>
+</sui-menu>
+</sui-segment>
+<div id="main" :style="{'margin-top': topMargin, height: mainHeight}">
+	<sui-grid :columns="2" stackable stretched style="height:100%;margin:0;">
+		<sui-grid-column :width="6">
+			<div id="canvases">
+				<canvas id="mainCanvas" height="360" width="640"></canvas>
+			</div>
+		</sui-grid-column>
+		<sui-grid-column :width="10" style="min-height:350px;">
+			<sui-segment style="padding: 0;">
+				<svg class="ws" id="ws" style="width:100%;height:100%;">
+					<component v-for="(block, index) in blocks" is="pwentk-block" :path="block.getPath()" :key="index" :text="block.template" :index="index"></component>
+				</svg>
+			</sui-segment>
+		</sui-grid-column>
+	</sui-grid>
+</div>
 </div>
 <script src="ui.js"></script>
 <script src="../../pwentkFabric.js"></script>
