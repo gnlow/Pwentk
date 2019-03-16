@@ -60,16 +60,9 @@ Vue.component("pwentk-block",{
 			console.log(e.interactable.options.drag.snap.targets);
 			e.interactable
 			.draggable({
-				inertia: true,
 				snap:{
 					targets:[{x:900, y:100, range: 50}]
-				},
-				restrict: {
-					restriction: "parent",
-					endOnly: true
-				},
-				autoScroll: true,
-				onmove: this.dragMove
+				}
 			});
 		}
 	}
