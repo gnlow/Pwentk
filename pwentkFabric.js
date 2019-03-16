@@ -36,9 +36,9 @@ var pwentkFabric = {
 	}
 };
 
-pwentk.event.newSprite = pwentkFabric.newSprite;
+pwentk.on("newSprite", pwentkFabric.newSprite);
 
-pwentk.event.changed = function(sprite){
+pwentk.on("changed", function(sprite){
 	let targetObject = canvas.getObjects().filter(val => {return val.id == sprite.id;})[0];
 	if(targetObject){
 		if(sprite.visible){
@@ -50,7 +50,7 @@ pwentk.event.changed = function(sprite){
 		pwentkFabric.newSprite(sprite);
 	}
 	canvas.renderAll();
-};
+});
 
 canvas.on("object:modified", function(event){
 	pwentk.getSprite(event.target.id, "id")

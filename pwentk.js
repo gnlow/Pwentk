@@ -15,7 +15,7 @@ var pwentk = {
 			this.setZ(z || 0, false);
 			this.setRotation(rotation || 0, false);
 			pwentk.sprites.push(this);
-			pwentk.event.newSprite(this);
+			pwentk.fire("newSprite", this);
 		}
 
 		setName(name, doEvent = true){
@@ -28,22 +28,22 @@ var pwentk = {
 			}else{
 				this.name = String(name);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		show(doEvent = true){
 			this.visible = true;
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		hide(doEvent = true){
 			this.visible = false;
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		setVisible(boolean, doEvent = true){
 			this.visible = Boolean(boolean);
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		setShape(n, doEvent = true){
@@ -54,7 +54,7 @@ var pwentk = {
 					pwentk.genErr(14,this);
 				}
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		getShape(){
@@ -66,7 +66,7 @@ var pwentk = {
 			}else{
 				pwentk.genErr(21,this);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		setScaleY(scaleY, doEvent = true){
@@ -75,7 +75,7 @@ var pwentk = {
 			}else{
 				pwentk.genErr(21,this);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		//좌표
@@ -85,7 +85,7 @@ var pwentk = {
 			}else{
 				pwentk.genErr(21,this);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		setY(y, doEvent = true){
@@ -94,7 +94,7 @@ var pwentk = {
 			}else{
 				pwentk.genErr(21,this);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		setZ(z, doEvent = true){
@@ -104,7 +104,7 @@ var pwentk = {
 			else{
 				pwentk.genErr(21,this);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		setRotation(rotation, doEvent = true){
@@ -114,7 +114,7 @@ var pwentk = {
 			else{
 				pwentk.genErr(21,this);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		addX(x, doEvent = true){
@@ -124,7 +124,7 @@ var pwentk = {
 			else{
 				pwentk.genErr(21,this);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		addY(y, doEvent = true){
@@ -134,7 +134,7 @@ var pwentk = {
 			else{
 				pwentk.genErr(21,this);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		addZ(z, doEvent = true){
@@ -144,7 +144,7 @@ var pwentk = {
 			else{
 				pwentk.genErr(21,this);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 		addRotation(rotation, doEvent = true){
@@ -154,7 +154,7 @@ var pwentk = {
 			else{
 				pwentk.genErr(21,this);
 			}
-			if(doEvent){pwentk.event.changed(this);}
+			if(doEvent){pwentk.fire("changed", this);}
 			return this;
 		}
 
@@ -245,7 +245,16 @@ var pwentk = {
 		"23": "잘못된 입력 형식 (String여야 함)"
 	},
 	event: {
-		newSprite: function(sprite){return sprite;}
+		newSprite: [],
+		changed: []
+	},
+	on: function(eventName, callback){
+		this.event[eventName].push(callback);
+	},
+	fire: function(eventName, param){
+		for(i in this.event[eventName]){
+			this.event[eventName][i](param);
+		}
 	},
 	getSprite: function(info, option = "name"){
 		switch(info.constructor.name){
