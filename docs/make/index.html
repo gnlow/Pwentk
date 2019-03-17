@@ -79,7 +79,7 @@
 			v-for="(scene, index) in scenes"
 			:active="activeScene == index" 
 			:content="scene.name"
-			@click.left="activeScene = index"
+			@click.left="setNowScene(index)"
 			@click.right="contextOpen($event, index)"
 			/>
 			<a is="sui-menu-item"

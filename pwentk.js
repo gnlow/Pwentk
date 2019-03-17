@@ -237,6 +237,32 @@ var pwentk = {
 			pwentk.fire("newSprite", sprite);
 		}
 	},
+	Project: class{
+		constructor(options){
+			this.name = options.name;
+			this.scenes = [new pwentk.Scene({"name": "장면 1"})];
+			this.nowSceneNo = 0;
+			pwentk.fire("sceneChanged", this);
+		}
+		setNowScene(sceneNo){
+			this.nowSceneNo = sceneNo;
+			pwentk.fire("sceneChanged", this);
+		}
+		nowScene(){
+			return this.scenes[this.nowSceneNo];
+		}
+		newScene(name){
+			this.scenes.push(new pwentk.Scene({"name": name}));
+		}
+		deleteScene(sceneNo){
+			this.scenes.splice(sceneNo, 1);
+			if(this.nowSceneNo > this.scenes.length - 1){
+				this.setNowScene(this.scenes.length - 1);
+			}else if(this.nowSceneNo > sceneNo){
+				this.setNowScene(this.nowSceneNo - 1);
+			}
+		}
+	},
 	genErr: function(errCode, errSprite){
 		if(errSprite){
 			console.warn(new Error(`"${errSprite.name}" 스프라이트에서 에러 #${errCode} : "${pwentk.errorCode[errCode]}"`));
@@ -259,7 +285,8 @@ var pwentk = {
 	},
 	event: {
 		newSprite: [],
-		changed: []
+		changed: [],
+		sceneChanged: []
 	},
 	on: function(eventName, callback){
 		this.event[eventName].push(callback);

@@ -67,13 +67,12 @@ Vue.component("pwentk-block",{
 		}
 	}
 });
+var main = new pwentk.Project({name: "새 작품"});
 var app = new Vue({
 	el: "#app",
 	data: {
-		scenes: [
-			new pwentk.Scene({name: "장면 1"})
-		],
-		activeScene: 0,
+		scenes: main.scenes,
+		activeScene: main.nowSceneNo,
 		targetScene: 0,
 		blocks: [],
 		ws: {
@@ -86,11 +85,14 @@ var app = new Vue({
 		context: false
 	},
 	methods: {
+		setNowScene(sceneNo){
+			main.setNowScene(sceneNo);
+		},
 		newScene(){
-			this.scenes.push(new pwentk.Scene({name:"장면 "+(this.scenes.length+1)}));
+			main.newScene("장면 "+(this.scenes.length+1));
 		},
 		deleteScene(){
-			this.scenes.splice(this.targetScene, 1);
+			main.deleteScene(this.targetScene);
 		},
 		contextOpen(e, target){
 			this.targetScene = target;
@@ -102,6 +104,11 @@ var app = new Vue({
 			this.context = false;
 		}
 	}
+});
+
+pwentk.on("sceneChanged", function(project){
+	app.scenes = project.scenes;
+	app.activeScene = project.nowSceneNo;
 });
 window.addEventListener("resize", canvasResize);
 window.addEventListener("DOMContentLoaded", canvasResize);

@@ -52,6 +52,9 @@ pwentk.on("changed", function(sprite){
 	canvas.renderAll();
 });
 
+pwentk.on("sceneChanged", function(project){
+	console.log(canvas.getObjects());
+});
 canvas.on("object:modified", function(event){
 	var sprite = pwentk.getSprite(app.scenes[app.activeScene], event.target.id, "id");
 	if(sprite){
