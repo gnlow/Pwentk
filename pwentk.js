@@ -252,7 +252,8 @@ var pwentk = {
 		this.event[eventName].push(callback);
 	},
 	fire: function(eventName, param){
-		for(i in this.event[eventName]){
+		console.log(`"${eventName}" event fired`);
+		for(var i in this.event[eventName]){
 			this.event[eventName][i](param);
 		}
 	},
