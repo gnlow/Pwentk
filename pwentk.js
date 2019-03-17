@@ -3,7 +3,7 @@ var pwentk = {
 	sprites: [],
 	Sprite: class{
 		constructor(name, visible, shapes, shapeNumber, scaleX, scaleY, x, y, z, rotation){			
-			this.id = Math.random().toString(36).substr(2, 5);
+			this.id = pwentk.genId();
 			this.setName(name, false);
 			this.setVisible(visible || true, false);
 			this.shapes = shapes || [{name:"Sample image",img:this.genImg("https://playentry.org/lib/entry-js/images/media/entrybot1.png")}];
@@ -279,5 +279,6 @@ var pwentk = {
 			}
 		}
 	},
-	nArray: arr => arr?arr:[]
+	nArray: arr => arr?arr:[],
+	genId: () => Math.random().toString(36).substr(2, 5)
 };
