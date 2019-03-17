@@ -1,6 +1,5 @@
 /* globals Image */
 var pwentk = {
-	sprites: [],
 	Sprite: class{
 		constructor(name, visible, shapes, shapeNumber, scaleX, scaleY, x, y, z, rotation){			
 			this.id = pwentk.genId();
@@ -14,18 +13,16 @@ var pwentk = {
 			this.setY(y || 0, false);
 			this.setZ(z || 0, false);
 			this.setRotation(rotation || 0, false);
-			pwentk.sprites.push(this);
-			pwentk.fire("newSprite", this);
 		}
 
 		setName(name, doEvent = true){
 			if(!name){
 				this.setName(`스프라이트 ${this.id}`, doEvent);
 				pwentk.genErr(22,this);
-			}else if(pwentk.sprites.some(val=>{return val.name==String(name);})){
+			}/*else if(pwentk.sprites.some(val=>{return val.name==String(name);})){
 				this.setName(`스프라이트 ${this.id}`, doEvent);
 				pwentk.genErr(11,this);
-			}else{
+			}*/else{
 				this.name = String(name);
 			}
 			if(doEvent){pwentk.fire("changed", this);}
@@ -224,6 +221,12 @@ var pwentk = {
 			return output;
 		}
 	},
+	Scene: class{
+		constructor(options){
+			this.name = options.name;
+			this.sprites = [];
+		}
+	},
 	genErr: function(errCode, errSprite){
 		if(errSprite){
 			console.warn(new Error(`"${errSprite.name}" 스프라이트에서 에러 #${errCode} : "${pwentk.errorCode[errCode]}"`));
@@ -257,10 +260,10 @@ var pwentk = {
 			this.event[eventName][i](param);
 		}
 	},
-	getSprite: function(info, option = "name"){
+	getSprite: function(scene, info, option = "name"){
 		switch(info.constructor.name){
 			case "Number":{
-				let returnTemp = this.sprites[info];
+				let returnTemp = scene.sprites[info];
 				if(returnTemp){
 					return returnTemp;
 				}else{
@@ -269,7 +272,7 @@ var pwentk = {
 				break;
 			}
 			case "String":{
-				let returnTemp = this.sprites.filter(val => {return val[option] == info;})[0];
+				let returnTemp = scene.sprites.filter(val => {return val[option] == info;})[0];
 				if(returnTemp){
 					return returnTemp;
 				}else{

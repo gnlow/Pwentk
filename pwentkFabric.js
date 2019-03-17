@@ -53,7 +53,7 @@ pwentk.on("changed", function(sprite){
 });
 
 canvas.on("object:modified", function(event){
-	pwentk.getSprite(event.target.id, "id")
+	pwentk.getSprite(app.scenes[app.activeScene], event.target.id, "id")
 	.setScaleX(event.target.scaleX, false)
 	.setScaleY(event.target.scaleY, false)
 	.setX(event.target.left- canvas.width/2, false)

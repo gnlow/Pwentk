@@ -71,7 +71,7 @@ var app = new Vue({
 	el: "#app",
 	data: {
 		scenes: [
-		"장면 1"
+			new pwentk.Scene({name: "장면 1"})
 		],
 		activeScene: 0,
 		targetScene: 0,
@@ -87,7 +87,7 @@ var app = new Vue({
 	},
 	methods: {
 		newScene(){
-			this.scenes.push("장면 "+(this.scenes.length+1))
+			this.scenes.push(new pwentk.Scene({name:"장면 "+(this.scenes.length+1)}));
 		},
 		deleteScene(){
 			this.scenes.splice(this.targetScene, 1);
