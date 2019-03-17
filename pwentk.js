@@ -15,6 +15,9 @@ var pwentk = {
 			this.setRotation(rotation || 0, false);
 		}
 
+		setScene(scene){
+			this.scene = scene;
+		}
 		setName(name, doEvent = true){
 			if(!name){
 				this.setName(`스프라이트 ${this.id}`, doEvent);
@@ -223,8 +226,15 @@ var pwentk = {
 	},
 	Scene: class{
 		constructor(options){
+			this.id = pwentk.genId();
 			this.name = options.name;
 			this.sprites = [];
+		}
+
+		newSprite(sprite){
+			sprite.setScene(this);
+			this.sprites.push(sprite);
+			pwentk.fire("newSprite", sprite);
 		}
 	},
 	genErr: function(errCode, errSprite){

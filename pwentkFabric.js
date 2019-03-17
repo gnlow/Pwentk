@@ -53,10 +53,13 @@ pwentk.on("changed", function(sprite){
 });
 
 canvas.on("object:modified", function(event){
-	pwentk.getSprite(app.scenes[app.activeScene], event.target.id, "id")
-	.setScaleX(event.target.scaleX, false)
-	.setScaleY(event.target.scaleY, false)
-	.setX(event.target.left- canvas.width/2, false)
-	.setY(-event.target.top+ canvas.height/2, false)
-	.setRotation(event.target.angle);
+	var sprite = pwentk.getSprite(app.scenes[app.activeScene], event.target.id, "id");
+	if(sprite){
+		sprite
+		.setScaleX(event.target.scaleX, false)
+		.setScaleY(event.target.scaleY, false)
+		.setX(event.target.left- canvas.width/2, false)
+		.setY(-event.target.top+ canvas.height/2, false)
+		.setRotation(event.target.angle);
+	}
 });
