@@ -19,6 +19,7 @@ var pwentkFabric = {
 			spriteImg.onload = function(){
 				canvas.add(new fabric.Image(spriteImg, pwentkFabric.spriteToObject(sprite)));
 				sprite.getShape().loaded = true;
+				pwentkFabric.spriteReDraw(sprite);
 			};
 		}
 	},
@@ -33,27 +34,35 @@ var pwentkFabric = {
 			originX: "center",
 			originY: "center"
 		};
+	},
+	spriteReDraw:function(sprite){
+		let targetObject = canvas.getObjects().filter(val => {return val.id == sprite.id;})[0];
+		if(targetObject){
+			if(sprite.visible && sprite.scene == main.nowScene()){
+				targetObject.set(pwentkFabric.spriteToObject(sprite));
+			}else{
+				canvas.remove(targetObject);
+			}
+		}else if(sprite.visible && sprite.scene == main.nowScene()){
+			pwentkFabric.newSprite(sprite);
+		}
+		canvas.renderAll();
 	}
 };
 
 pwentk.on("newSprite", pwentkFabric.newSprite);
 
-pwentk.on("changed", function(sprite){
-	let targetObject = canvas.getObjects().filter(val => {return val.id == sprite.id;})[0];
-	if(targetObject){
-		if(sprite.visible){
-			targetObject.set(pwentkFabric.spriteToObject(sprite));
-		}else{
-			canvas.remove(targetObject);
-		}
-	}else if(sprite.visible){
-		pwentkFabric.newSprite(sprite);
-	}
-	canvas.renderAll();
-});
+pwentk.on("changed", pwentkFabric.spriteReDraw);
 
 pwentk.on("sceneChanged", function(project){
 	console.log(canvas.getObjects());
+	canvas.remove(...canvas.getObjects());
+	for(var i in main.nowScene().sprites){
+		if(main.nowScene().sprites[i].visible){
+			pwentkFabric.newSprite(main.nowScene().sprites[i]);
+		}
+	}
+	canvas.renderAll();
 });
 canvas.on("object:modified", function(event){
 	var sprite = pwentk.getSprite(app.scenes[app.activeScene], event.target.id, "id");
