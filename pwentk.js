@@ -1,8 +1,7 @@
 /* globals Image */
 var pwentk = {
 	Sprite: class{
-		constructor(name, visible, shapes, shapeNumber, scaleX, scaleY, x, y, z, rotation){			
-			this.id = pwentk.genId();
+		constructor(name, visible, shapes, shapeNumber, scaleX, scaleY, x, y, z, rotation){
 			this.setName(name, false);
 			this.setVisible(visible || true, false);
 			this.shapes = shapes || [{name:"Sample image",img:this.genImg("https://playentry.org/lib/entry-js/images/media/entrybot1.png")}];
@@ -20,7 +19,7 @@ var pwentk = {
 		}
 		setName(name, doEvent = true){
 			if(!name){
-				this.setName(`스프라이트 ${this.id}`, doEvent);
+				this.setName(`스프라이트 ${pwentk.genId()}`, doEvent);
 				pwentk.genErr(22,this);
 			}/*else if(pwentk.sprites.some(val=>{return val.name==String(name);})){
 				this.setName(`스프라이트 ${this.id}`, doEvent);
@@ -226,7 +225,6 @@ var pwentk = {
 	},
 	Scene: class{
 		constructor(options){
-			this.id = pwentk.genId();
 			this.name = options.name;
 			this.sprites = [];
 		}

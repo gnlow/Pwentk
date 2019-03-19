@@ -25,7 +25,7 @@ var pwentkFabric = {
 	},
 	spriteToObject:function(sprite){
 		return {
-			id: sprite.id,
+			sprite: sprite,
 			scaleX: sprite.scaleX,
 			scaleY: sprite.scaleY,
 			left: sprite.x+ canvas.width/2,
@@ -36,7 +36,7 @@ var pwentkFabric = {
 		};
 	},
 	spriteReDraw:function(sprite){
-		let targetObject = canvas.getObjects().filter(val => {return val.id == sprite.id;})[0];
+		let targetObject = canvas.getObjects().filter(val => {return val.sprite == sprite;})[0];
 		if(targetObject){
 			if(sprite.visible && sprite.scene == main.nowScene()){
 				targetObject.set(pwentkFabric.spriteToObject(sprite));
@@ -65,7 +65,7 @@ pwentk.on("sceneChanged", function(project){
 	canvas.renderAll();
 });
 canvas.on("object:modified", function(event){
-	var sprite = pwentk.getSprite(main.nowScene(), event.target.id, "id");
+	var sprite = event.target.sprite;
 	if(sprite){
 		sprite
 		.setScaleX(event.target.scaleX, false)
