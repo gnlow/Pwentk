@@ -106,9 +106,5 @@ var app = new Vue({
 	}
 });
 
-pwentk.on("sceneChanged", function(project){
-	app.scenes = project.scenes;
-	app.activeScene = project.nowSceneNo;
-});
 window.addEventListener("resize", canvasResize);
 window.addEventListener("DOMContentLoaded", canvasResize);
