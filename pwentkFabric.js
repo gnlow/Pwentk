@@ -65,7 +65,7 @@ pwentk.on("sceneChanged", function(project){
 	canvas.renderAll();
 });
 canvas.on("object:modified", function(event){
-	var sprite = pwentk.getSprite(app.scenes[app.activeScene], event.target.id, "id");
+	var sprite = pwentk.getSprite(main.nowScene(), event.target.id, "id");
 	if(sprite){
 		sprite
 		.setScaleX(event.target.scaleX, false)
