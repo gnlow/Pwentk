@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../">
-  <title data-ice="title">src/pwentkFabric.js | pwentk</title>
+  <title data-ice="title">src/scene.js | pwentk</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -39,84 +39,21 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/pwentkFabric.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* globals fabric */
-/* globals pwentk */
-var canvas = new fabric.Canvas(&quot;mainCanvas&quot;);
-canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
+<div class="content" data-ice="content"><h1 data-ice="title">src/scene.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import pwentk from &quot;./global.js&quot;;
 
-fabric.Object.prototype.cornerSize = 30;
-fabric.Object.prototype.transparentCorners = false;
-fabric.Object.prototype.borderScaleFactor = 5;
-fabric.Object.prototype.rotatingPointOffset = 120;
-fabric.Object.prototype.borderColor = &quot;rgba(235,88,171,0.75)&quot;;
-fabric.Object.prototype.cornerColor = &quot;rgba(235,88,171,0.75)&quot;;
-
-var pwentkFabric = {
-	newSprite:function(sprite){
-		let spriteImg = sprite.getShape().img;
-		if(sprite.getShape().loaded){
-			canvas.add(new fabric.Image(spriteImg, pwentkFabric.spriteToObject(sprite)));
-		}else{
-			spriteImg.onload = function(){
-				canvas.add(new fabric.Image(spriteImg, pwentkFabric.spriteToObject(sprite)));
-				sprite.getShape().loaded = true;
-				pwentkFabric.spriteReDraw(sprite);
-			};
-		}
-	},
-	spriteToObject:function(sprite){
-		return {
-			sprite: sprite,
-			scaleX: sprite.scaleX,
-			scaleY: sprite.scaleY,
-			left: sprite.x+ canvas.width/2,
-			top: -sprite.y+ canvas.height/2,
-			angle: sprite.rotation,
-			originX: &quot;center&quot;,
-			originY: &quot;center&quot;
-		};
-	},
-	spriteReDraw:function(sprite){
-		let targetObject = canvas.getObjects().filter(val =&gt; {return val.sprite == sprite;})[0];
-		if(targetObject){
-			if(sprite.visible &amp;&amp; sprite.scene == main.nowScene()){
-				targetObject.set(pwentkFabric.spriteToObject(sprite));
-			}else{
-				canvas.remove(targetObject);
-			}
-		}else if(sprite.visible &amp;&amp; sprite.scene == main.nowScene()){
-			pwentkFabric.newSprite(sprite);
-		}
-		canvas.renderAll();
+export default class Scene{
+	constructor(options){
+		this.name = options.name;
+		this.sprites = [];
 	}
-};
 
-pwentk.on(&quot;newSprite&quot;, pwentkFabric.newSprite);
-
-pwentk.on(&quot;changed&quot;, pwentkFabric.spriteReDraw);
-
-pwentk.on(&quot;sceneChanged&quot;, function(project){
-	console.log(canvas.getObjects());
-	canvas.remove(...canvas.getObjects());
-	for(var i in main.nowScene().sprites){
-		if(main.nowScene().sprites[i].visible){
-			pwentkFabric.newSprite(main.nowScene().sprites[i]);
-		}
+	newSprite(sprite){
+		sprite.setScene(this);
+		this.sprites.push(sprite);
+		pwentk.fire(&quot;newSprite&quot;, sprite);
 	}
-	canvas.renderAll();
-});
-canvas.on(&quot;object:modified&quot;, function(event){
-	var sprite = event.target.sprite;
-	if(sprite){
-		sprite
-		.setScaleX(event.target.scaleX, false)
-		.setScaleY(event.target.scaleY, false)
-		.setX(event.target.left- canvas.width/2, false)
-		.setY(-event.target.top+ canvas.height/2, false)
-		.setRotation(event.target.angle);
-	}
-});</code></pre>
+}</code></pre>
 
 </div>
 

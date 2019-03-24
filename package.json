@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build": "webpack",
-    "devserver": "webpack-dev-server --open --progress"
+    "devserver": "webpack-dev-server --open --progress",
+    "esdoc": "./node_modules/.bin/esdoc"
   },
   "repository": {
     "type": "git",
@@ -20,14 +21,13 @@
     "url": "https://github.com/EntryDark/Pwentk/issues"
   },
   "homepage": "https://github.com/EntryDark/Pwentk#readme",
-  "dependencies": {
-    "esdoc": "^1.1.0",
-    "esdoc-standard-plugin": "^1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "babel-loader": "^8.0.5",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1"

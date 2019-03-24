@@ -566,8 +566,465 @@
   {
     "__docId__": 48,
     "kind": "file",
+    "name": "src/block.js",
+    "content": "import pwentk from \"./global.js\";\r\n\r\nexport default class Block{\r\n\tconstructor(parent){\r\n\t\tthis.name = parent.name;\r\n\t\tthis.template = parent.template;\r\n\t\tthis.param = parent.param;\r\n\t\tthis.innerBlock = this.param.filter(val=>val.type==\"function\")\r\n\t}\r\n\tgetPath(text){\r\n\t\tvar output = \"\";\r\n\t\toutput += `M0 0 l 5 5 v -4 \r\n\t\ta 1 1 90 0 1 1 -1  \r\n\t\th 70\r\n\t\ta 5 5 180 0 1 0 10 `;\r\n\t\toutput += `H 11 `;\r\n\r\n\t\tif(this.innerBlock.length > 0){\r\n\t\t\toutput += `a 1 1 90 0 0 -1 1\r\n\t\t\tv 4\r\n\t\t\tl -5 -5`;\r\n\t\t\tfor(var i=0;i<this.innerBlock.length-1;i++){\r\n\t\t\t\toutput += `v 10 \r\n\t\t\t\tl 5 5 v -4 \r\n\t\t\t\ta 1 1 90 0 1 1 -1  \r\n\t\t\t\th 20 \r\n\t\t\t\ta 5 5 180 0 1 0 10 \r\n\t\t\t\tH 11 \r\n\t\t\t\ta 1 1 90 0 0 -1 1 \r\n\t\t\t\tv 4 \r\n\t\t\t\tl -5 -5 `;\r\n\t\t\t}\r\n\t\t\toutput += `v 10 \r\n\t\t\tl 5 5 v -4 \r\n\t\t\ta 1 1 90 0 1 1 -1  \r\n\t\t\th 20 \r\n\t\t\ta 5 5 180 0 1 0 10 `;\r\n\t\t}\r\n\t\toutput += `H 6 a 1 1 90 0 0 -1 1 v 5 l -5 -5\r\n\t\tZ`;\r\n\t\treturn output;\r\n\t}\r\n}",
+    "static": true,
+    "longname": "C:/Pwentk/src/block.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "class",
+    "name": "Block",
+    "memberof": "src/block.js",
+    "static": true,
+    "longname": "src/block.js~Block",
+    "access": "public",
+    "export": true,
+    "importPath": "pwentk/src/block.js",
+    "importStyle": "Block",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 50,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/block.js~Block",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/block.js~Block#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "member",
+    "name": "name",
+    "memberof": "src/block.js~Block",
+    "static": false,
+    "longname": "src/block.js~Block#name",
+    "access": "public",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "name": "template",
+    "memberof": "src/block.js~Block",
+    "static": false,
+    "longname": "src/block.js~Block#template",
+    "access": "public",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "member",
+    "name": "param",
+    "memberof": "src/block.js~Block",
+    "static": false,
+    "longname": "src/block.js~Block#param",
+    "access": "public",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "member",
+    "name": "innerBlock",
+    "memberof": "src/block.js~Block",
+    "static": false,
+    "longname": "src/block.js~Block#innerBlock",
+    "access": "public",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "method",
+    "name": "getPath",
+    "memberof": "src/block.js~Block",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/block.js~Block#getPath",
+    "access": "public",
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "params": [
+      {
+        "name": "text",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "file",
+    "name": "src/blockset.js",
+    "content": "import pwentk from \"./global.js\";\r\n\r\nexport default class BlockSet{\r\n\tconstructor(options){\r\n\t\tthis.name = options.name;\r\n\t\tthis.template = options.template;\r\n\t\tthis.func = options.func;\r\n\t\tthis.param = \r\n\t\tpwentk.nArray(this.template.match(/(?<=\\(\\()(.*?)(?=\\)\\))/g))\r\n\t\t.map(name => ({name: name, type: \"string\", data: \"0\"}))\r\n\t\t.concat(\r\n\t\t\tpwentk.nArray(this.template.match(/(?<=\\<\\<)(.*?)(?=\\>\\>)/g))\r\n\t\t\t.map(name => ({name: name, type: \"boolean\", data: true}))\r\n\t\t\t)\r\n\t\t.concat(\r\n\t\t\tpwentk.nArray(this.template.match(/(?<=\\{\\{)(.*?)(?=\\}\\})/g))\r\n\t\t\t.map(name => ({name: name, type: \"function\", data: function(){}}))\r\n\t\t\t);\r\n\t}\r\n}",
+    "static": true,
+    "longname": "C:/Pwentk/src/blockset.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 57,
+    "kind": "class",
+    "name": "BlockSet",
+    "memberof": "src/blockset.js",
+    "static": true,
+    "longname": "src/blockset.js~BlockSet",
+    "access": "public",
+    "export": true,
+    "importPath": "pwentk/src/blockset.js",
+    "importStyle": "BlockSet",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 58,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/blockset.js~BlockSet",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/blockset.js~BlockSet#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "member",
+    "name": "name",
+    "memberof": "src/blockset.js~BlockSet",
+    "static": false,
+    "longname": "src/blockset.js~BlockSet#name",
+    "access": "public",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 60,
+    "kind": "member",
+    "name": "template",
+    "memberof": "src/blockset.js~BlockSet",
+    "static": false,
+    "longname": "src/blockset.js~BlockSet#template",
+    "access": "public",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 61,
+    "kind": "member",
+    "name": "func",
+    "memberof": "src/blockset.js~BlockSet",
+    "static": false,
+    "longname": "src/blockset.js~BlockSet#func",
+    "access": "public",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 62,
+    "kind": "member",
+    "name": "param",
+    "memberof": "src/blockset.js~BlockSet",
+    "static": false,
+    "longname": "src/blockset.js~BlockSet#param",
+    "access": "public",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "file",
+    "name": "src/global.js",
+    "content": "/* globals Image */\r\nvar pwentk = {\r\n\tgenErr: function(errCode, errSprite){\r\n\t\tif(errSprite){\r\n\t\t\tconsole.warn(new Error(`\"${errSprite.name}\" 스프라이트에서 에러 #${errCode} : \"${pwentk.errorCode[errCode]}\"`));\r\n\t\t}else{\r\n\t\t\tconsole.warn(new Error(`에러 #${errCode} : \"${pwentk.errorCode[errCode]}\"`));\r\n\t\t}\r\n\t},\r\n\terrorCode: {\r\n\t\t\"10\": \"잘못된 참조\",\r\n\t\t\"11\": \"중복된 스프라이트 이름\",\r\n\t\t\"12\": \"존재하지 않는 스프라이트 번호\",\r\n\t\t\"13\": \"존재하지 않는 스프라이트 이름\",\r\n\t\t\"14\": \"존재하지 않는 모양 번호\",\r\n\t\t\"15\": \"존재하지 않는 모양 이름\",\r\n\r\n\t\t\"20\": \"잘못된 입력 형식\",\r\n\t\t\"21\": \"잘못된 입력 형식 (Number여야 함)\",\r\n\t\t\"22\": \"스프라이트 이름이 입력되지 않음\",\r\n\t\t\"23\": \"잘못된 입력 형식 (String여야 함)\"\r\n\t},\r\n\tevent: {\r\n\t\tnewSprite: [],\r\n\t\tchanged: [],\r\n\t\tsceneChanged: []\r\n\t},\r\n\ton: function(eventName, callback){\r\n\t\tthis.event[eventName].push(callback);\r\n\t},\r\n\tfire: function(eventName, param){\r\n\t\tconsole.log(`\"${eventName}\" event fired`);\r\n\t\tfor(var i in this.event[eventName]){\r\n\t\t\tthis.event[eventName][i](param);\r\n\t\t}\r\n\t},\r\n\tgetSprite: function(scene, info, option = \"name\"){\r\n\t\tswitch(info.constructor.name){\r\n\t\t\tcase \"Number\":{\r\n\t\t\t\tlet returnTemp = scene.sprites[info];\r\n\t\t\t\tif(returnTemp){\r\n\t\t\t\t\treturn returnTemp;\r\n\t\t\t\t}else{\r\n\t\t\t\t\tpwentk.genErr(12);\r\n\t\t\t\t}\r\n\t\t\t\tbreak;\r\n\t\t\t}\r\n\t\t\tcase \"String\":{\r\n\t\t\t\tlet returnTemp = scene.sprites.filter(val => {return val[option] == info;})[0];\r\n\t\t\t\tif(returnTemp){\r\n\t\t\t\t\treturn returnTemp;\r\n\t\t\t\t}else{\r\n\t\t\t\t\tpwentk.genErr(13);\r\n\t\t\t\t}\r\n\t\t\t\tbreak;\r\n\t\t\t}\r\n\t\t}\r\n\t},\r\n\tnArray: arr => arr?arr:[],\r\n\tgenId: () => Math.random().toString(36).substr(2, 5)\r\n};\r\n\r\nexport default pwentk;",
+    "static": true,
+    "longname": "C:/Pwentk/src/global.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 64,
+    "kind": "variable",
+    "name": "pwentk",
+    "memberof": "src/global.js",
+    "static": true,
+    "longname": "src/global.js~pwentk",
+    "access": "public",
+    "export": true,
+    "importPath": "pwentk/src/global.js",
+    "importStyle": "pwentk",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"genErr\": *, \"errorCode\": *, \"event\": *, \"on\": *, \"fire\": *, \"getSprite\": *, \"nArray\": *, \"genId\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 65,
+    "kind": "file",
+    "name": "src/project.js",
+    "content": "import pwentk from \"./global.js\";\r\n\r\nexport default class Project{\r\n\t\tconstructor(options){\r\n\t\t\tthis.name = options.name;\r\n\t\t\tthis.scenes = [new pwentk.Scene({\"name\": \"장면 1\"})];\r\n\t\t\tthis.nowSceneNo = 0;\r\n\t\t\tpwentk.fire(\"sceneChanged\", this);\r\n\t\t}\r\n\t\tsetNowScene(sceneNo){\r\n\t\t\tthis.nowSceneNo = sceneNo;\r\n\t\t\tpwentk.fire(\"sceneChanged\", this);\r\n\t\t}\r\n\t\tnowScene(){\r\n\t\t\treturn this.scenes[this.nowSceneNo];\r\n\t\t}\r\n\t\tnewScene(name){\r\n\t\t\tthis.scenes.push(new pwentk.Scene({\"name\": name}));\r\n\t\t}\r\n\t\tdeleteScene(sceneNo){\r\n\t\t\tthis.scenes.splice(sceneNo, 1);\r\n\t\t\tif(this.nowSceneNo > this.scenes.length - 1){\r\n\t\t\t\tthis.setNowScene(this.scenes.length - 1);\r\n\t\t\t}else if(this.nowSceneNo > sceneNo){\r\n\t\t\t\tthis.setNowScene(this.nowSceneNo - 1);\r\n\t\t\t}\r\n\t\t}\r\n\t}",
+    "static": true,
+    "longname": "C:/Pwentk/src/project.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 66,
+    "kind": "class",
+    "name": "Project",
+    "memberof": "src/project.js",
+    "static": true,
+    "longname": "src/project.js~Project",
+    "access": "public",
+    "export": true,
+    "importPath": "pwentk/src/project.js",
+    "importStyle": "Project",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 67,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/project.js~Project",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/project.js~Project#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "member",
+    "name": "name",
+    "memberof": "src/project.js~Project",
+    "static": false,
+    "longname": "src/project.js~Project#name",
+    "access": "public",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "member",
+    "name": "scenes",
+    "memberof": "src/project.js~Project",
+    "static": false,
+    "longname": "src/project.js~Project#scenes",
+    "access": "public",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "undefined[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "member",
+    "name": "nowSceneNo",
+    "memberof": "src/project.js~Project",
+    "static": false,
+    "longname": "src/project.js~Project#nowSceneNo",
+    "access": "public",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 71,
+    "kind": "method",
+    "name": "setNowScene",
+    "memberof": "src/project.js~Project",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/project.js~Project#setNowScene",
+    "access": "public",
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "params": [
+      {
+        "name": "sceneNo",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 73,
+    "kind": "method",
+    "name": "nowScene",
+    "memberof": "src/project.js~Project",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/project.js~Project#nowScene",
+    "access": "public",
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 74,
+    "kind": "method",
+    "name": "newScene",
+    "memberof": "src/project.js~Project",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/project.js~Project#newScene",
+    "access": "public",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 75,
+    "kind": "method",
+    "name": "deleteScene",
+    "memberof": "src/project.js~Project",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/project.js~Project#deleteScene",
+    "access": "public",
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "params": [
+      {
+        "name": "sceneNo",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 76,
+    "kind": "file",
     "name": "src/pwentk.js",
-    "content": "/* globals Image */\r\n/**\r\n * Test\r\n * @property\r\n */\r\nvar pwentk = {\r\n\t/**\r\n\t * Test\r\n\t */\r\n\t\t Sprite: class{\r\n\t\t/**\r\n\t\t * Test\r\n\t\t */\r\n\t\t constructor(name, visible, shapes, shapeNumber, scaleX, scaleY, x, y, z, rotation){\r\n\t\t \tthis.setName(name, false);\r\n\t\t \tthis.setVisible(visible || true, false);\r\n\t\t \tthis.shapes = shapes || [{name:\"Sample image\",img:this.genImg(\"https://playentry.org/lib/entry-js/images/media/entrybot1.png\")}];\r\n\t\t \tthis.setShape(shapeNumber || 0, false);\r\n\t\t \tthis.setScaleX(scaleX || 1, false);\r\n\t\t \tthis.setScaleY(scaleY || 1, false);\r\n\t\t \tthis.setX(x || 0, false);\r\n\t\t \tthis.setY(y || 0, false);\r\n\t\t \tthis.setZ(z || 0, false);\r\n\t\t \tthis.setRotation(rotation || 0, false);\r\n\t\t }\r\n\r\n\t\t setScene(scene){\r\n\t\t \tthis.scene = scene;\r\n\t\t }\r\n\t\t setName(name, doEvent = true){\r\n\t\t \tif(!name){\r\n\t\t \t\tthis.setName(`스프라이트 ${pwentk.genId()}`, doEvent);\r\n\t\t \t\tpwentk.genErr(22,this);\r\n\t\t\t}/*else if(pwentk.sprites.some(val=>{return val.name==String(name);})){\r\n\t\t\t\tthis.setName(`스프라이트 ${this.id}`, doEvent);\r\n\t\t\t\tpwentk.genErr(11,this);\r\n\t\t\t}*/else{\r\n\t\t\t\tthis.name = String(name);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tshow(doEvent = true){\r\n\t\t\tthis.visible = true;\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\thide(doEvent = true){\r\n\t\t\tthis.visible = false;\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetVisible(boolean, doEvent = true){\r\n\t\t\tthis.visible = Boolean(boolean);\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetShape(n, doEvent = true){\r\n\t\t\tif(!isNaN(n)){\r\n\t\t\t\tif(this.shapes[Number(n)]){\r\n\t\t\t\t\tthis.shapeNumber = Number(n);\r\n\t\t\t\t}else{\r\n\t\t\t\t\tpwentk.genErr(14,this);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tgetShape(){\r\n\t\t\treturn this.shapes[this.shapeNumber];\r\n\t\t}\r\n\t\tsetScaleX(scaleX, doEvent = true){\r\n\t\t\tif(!isNaN(scaleX)){\r\n\t\t\t\tthis.scaleX = Number(scaleX);\r\n\t\t\t}else{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetScaleY(scaleY, doEvent = true){\r\n\t\t\tif(!isNaN(scaleY)){\r\n\t\t\t\tthis.scaleY = Number(scaleY);\r\n\t\t\t}else{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\t//좌표\r\n\t\tsetX(x, doEvent = true){\r\n\t\t\tif(!isNaN(x)){\r\n\t\t\t\tthis.x = Number(x);\r\n\t\t\t}else{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetY(y, doEvent = true){\r\n\t\t\tif(!isNaN(y)){\r\n\t\t\t\tthis.y = Number(y);\r\n\t\t\t}else{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetZ(z, doEvent = true){\r\n\t\t\tif(!isNaN(z)){\r\n\t\t\t\tthis.z = Number(z);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetRotation(rotation, doEvent = true){\r\n\t\t\tif(!isNaN(rotation)){\r\n\t\t\t\tthis.rotation = Number(rotation);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\taddX(x, doEvent = true){\r\n\t\t\tif(!isNaN(x)){\r\n\t\t\t\tthis.x += Number(x);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\taddY(y, doEvent = true){\r\n\t\t\tif(!isNaN(y)){\r\n\t\t\t\tthis.y += Number(y);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\taddZ(z, doEvent = true){\r\n\t\t\tif(!isNaN(z)){\r\n\t\t\t\tthis.z += Number(z);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\taddRotation(rotation, doEvent = true){\r\n\t\t\tif(!isNaN(rotation)){\r\n\t\t\t\tthis.rotation += Number(rotation);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\r\n\t\tgenImg(src){\r\n\t\t\tlet img = new Image();\r\n\t\t\timg.src = src;\r\n\t\t\treturn img;\r\n\t\t}\r\n\r\n\t},\r\n\tBlockSet: class{\r\n\t\tconstructor(options){\r\n\t\t\tthis.name = options.name;\r\n\t\t\tthis.template = options.template;\r\n\t\t\tthis.func = options.func;\r\n\t\t\tthis.param = \r\n\t\t\tpwentk.nArray(this.template.match(/(?<=\\(\\()(.*?)(?=\\)\\))/g))\r\n\t\t\t.map(name => ({name: name, type: \"string\", data: \"0\"}))\r\n\t\t\t.concat(\r\n\t\t\t\tpwentk.nArray(this.template.match(/(?<=\\<\\<)(.*?)(?=\\>\\>)/g))\r\n\t\t\t\t.map(name => ({name: name, type: \"boolean\", data: true}))\r\n\t\t\t\t)\r\n\t\t\t.concat(\r\n\t\t\t\tpwentk.nArray(this.template.match(/(?<=\\{\\{)(.*?)(?=\\}\\})/g))\r\n\t\t\t\t.map(name => ({name: name, type: \"function\", data: function(){}}))\r\n\t\t\t\t);\r\n\t\t}\r\n\t},\r\n\tBlock: class{\r\n\t\tconstructor(parent){\r\n\t\t\tthis.name = parent.name;\r\n\t\t\tthis.template = parent.template;\r\n\t\t\tthis.param = parent.param;\r\n\t\t\tthis.innerBlock = this.param.filter(val=>val.type==\"function\")\r\n\t\t}\r\n\t\tgetPath(text){\r\n\t\t\tvar output = \"\";\r\n\t\t\toutput += `M0 0 l 5 5 v -4 \r\n\t\t\ta 1 1 90 0 1 1 -1  \r\n\t\t\th 70\r\n\t\t\ta 5 5 180 0 1 0 10 `;\r\n\t\t\toutput += `H 11 `;\r\n\r\n\t\t\tif(this.innerBlock.length > 0){\r\n\t\t\t\toutput += `a 1 1 90 0 0 -1 1\r\n\t\t\t\tv 4\r\n\t\t\t\tl -5 -5`;\r\n\t\t\t\tfor(var i=0;i<this.innerBlock.length-1;i++){\r\n\t\t\t\t\toutput += `v 10 \r\n\t\t\t\t\tl 5 5 v -4 \r\n\t\t\t\t\ta 1 1 90 0 1 1 -1  \r\n\t\t\t\t\th 20 \r\n\t\t\t\t\ta 5 5 180 0 1 0 10 \r\n\t\t\t\t\tH 11 \r\n\t\t\t\t\ta 1 1 90 0 0 -1 1 \r\n\t\t\t\t\tv 4 \r\n\t\t\t\t\tl -5 -5 `;\r\n\t\t\t\t}\r\n\t\t\t\toutput += `v 10 \r\n\t\t\t\tl 5 5 v -4 \r\n\t\t\t\ta 1 1 90 0 1 1 -1  \r\n\t\t\t\th 20 \r\n\t\t\t\ta 5 5 180 0 1 0 10 `;\r\n\t\t\t}\r\n\t\t\toutput += `H 6 a 1 1 90 0 0 -1 1 v 5 l -5 -5\r\n\t\t\tZ`;\r\n\t\t\treturn output;\r\n\t\t}\r\n\t},\r\n\tScene: class{\r\n\t\tconstructor(options){\r\n\t\t\tthis.name = options.name;\r\n\t\t\tthis.sprites = [];\r\n\t\t}\r\n\r\n\t\tnewSprite(sprite){\r\n\t\t\tsprite.setScene(this);\r\n\t\t\tthis.sprites.push(sprite);\r\n\t\t\tpwentk.fire(\"newSprite\", sprite);\r\n\t\t}\r\n\t},\r\n\tProject: class{\r\n\t\tconstructor(options){\r\n\t\t\tthis.name = options.name;\r\n\t\t\tthis.scenes = [new pwentk.Scene({\"name\": \"장면 1\"})];\r\n\t\t\tthis.nowSceneNo = 0;\r\n\t\t\tpwentk.fire(\"sceneChanged\", this);\r\n\t\t}\r\n\t\tsetNowScene(sceneNo){\r\n\t\t\tthis.nowSceneNo = sceneNo;\r\n\t\t\tpwentk.fire(\"sceneChanged\", this);\r\n\t\t}\r\n\t\tnowScene(){\r\n\t\t\treturn this.scenes[this.nowSceneNo];\r\n\t\t}\r\n\t\tnewScene(name){\r\n\t\t\tthis.scenes.push(new pwentk.Scene({\"name\": name}));\r\n\t\t}\r\n\t\tdeleteScene(sceneNo){\r\n\t\t\tthis.scenes.splice(sceneNo, 1);\r\n\t\t\tif(this.nowSceneNo > this.scenes.length - 1){\r\n\t\t\t\tthis.setNowScene(this.scenes.length - 1);\r\n\t\t\t}else if(this.nowSceneNo > sceneNo){\r\n\t\t\t\tthis.setNowScene(this.nowSceneNo - 1);\r\n\t\t\t}\r\n\t\t}\r\n\t},\r\n\tgenErr: function(errCode, errSprite){\r\n\t\tif(errSprite){\r\n\t\t\tconsole.warn(new Error(`\"${errSprite.name}\" 스프라이트에서 에러 #${errCode} : \"${pwentk.errorCode[errCode]}\"`));\r\n\t\t}else{\r\n\t\t\tconsole.warn(new Error(`에러 #${errCode} : \"${pwentk.errorCode[errCode]}\"`));\r\n\t\t}\r\n\t},\r\n\terrorCode: {\r\n\t\t\"10\": \"잘못된 참조\",\r\n\t\t\"11\": \"중복된 스프라이트 이름\",\r\n\t\t\"12\": \"존재하지 않는 스프라이트 번호\",\r\n\t\t\"13\": \"존재하지 않는 스프라이트 이름\",\r\n\t\t\"14\": \"존재하지 않는 모양 번호\",\r\n\t\t\"15\": \"존재하지 않는 모양 이름\",\r\n\r\n\t\t\"20\": \"잘못된 입력 형식\",\r\n\t\t\"21\": \"잘못된 입력 형식 (Number여야 함)\",\r\n\t\t\"22\": \"스프라이트 이름이 입력되지 않음\",\r\n\t\t\"23\": \"잘못된 입력 형식 (String여야 함)\"\r\n\t},\r\n\tevent: {\r\n\t\tnewSprite: [],\r\n\t\tchanged: [],\r\n\t\tsceneChanged: []\r\n\t},\r\n\ton: function(eventName, callback){\r\n\t\tthis.event[eventName].push(callback);\r\n\t},\r\n\tfire: function(eventName, param){\r\n\t\tconsole.log(`\"${eventName}\" event fired`);\r\n\t\tfor(var i in this.event[eventName]){\r\n\t\t\tthis.event[eventName][i](param);\r\n\t\t}\r\n\t},\r\n\tgetSprite: function(scene, info, option = \"name\"){\r\n\t\tswitch(info.constructor.name){\r\n\t\t\tcase \"Number\":{\r\n\t\t\t\tlet returnTemp = scene.sprites[info];\r\n\t\t\t\tif(returnTemp){\r\n\t\t\t\t\treturn returnTemp;\r\n\t\t\t\t}else{\r\n\t\t\t\t\tpwentk.genErr(12);\r\n\t\t\t\t}\r\n\t\t\t\tbreak;\r\n\t\t\t}\r\n\t\t\tcase \"String\":{\r\n\t\t\t\tlet returnTemp = scene.sprites.filter(val => {return val[option] == info;})[0];\r\n\t\t\t\tif(returnTemp){\r\n\t\t\t\t\treturn returnTemp;\r\n\t\t\t\t}else{\r\n\t\t\t\t\tpwentk.genErr(13);\r\n\t\t\t\t}\r\n\t\t\t\tbreak;\r\n\t\t\t}\r\n\t\t}\r\n\t},\r\n\tnArray: arr => arr?arr:[],\r\n\tgenId: () => Math.random().toString(36).substr(2, 5)\r\n};",
+    "content": "import pwentk from \"./global.js\";\r\nimport Project from \"./project.js\";\r\nimport Scene from \"./scene.js\";\r\nimport BlockSet from \"./blockset.js\";\r\nimport Block from \"./block.js\";\r\nimport Sprite from \"./sprite.js\";\r\n\r\npwentk.Project = Project;\r\npwentk.Scene = Scene;\r\npwentk.BlockSet = BlockSet;\r\npwentk.Block = Block;\r\npwentk.Sprite = Sprite;\r\n\r\nwindow.pwentk = pwentk;\r\n\r\nexport default pwentk;",
     "static": true,
     "longname": "C:/Pwentk/src/pwentk.js",
     "access": "public",
@@ -575,37 +1032,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 49,
-    "kind": "variable",
-    "name": "pwentk",
-    "memberof": "src/pwentk.js",
-    "static": true,
-    "longname": "src/pwentk.js~pwentk",
-    "access": "public",
-    "export": false,
-    "importPath": "pwentk/src/pwentk.js",
-    "importStyle": null,
-    "description": "Test",
-    "lineNumber": 6,
-    "properties": [
-      {
-        "nullable": null,
-        "types": [
-          "*"
-        ],
-        "spread": false,
-        "description": ""
-      }
-    ],
-    "type": {
-      "types": [
-        "{\"Sprite\": *, \"BlockSet\": *, \"Block\": *, \"Scene\": *, \"Project\": *, \"genErr\": *, \"errorCode\": *, \"event\": *, \"on\": *, \"fire\": *, \"getSprite\": *, \"nArray\": *, \"genId\": *}"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 50,
+    "__docId__": 77,
     "kind": "file",
     "name": "src/pwentkFabric.js",
     "content": "/* globals fabric */\r\n/* globals pwentk */\r\nvar canvas = new fabric.Canvas(\"mainCanvas\");\r\ncanvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});\r\n\r\nfabric.Object.prototype.cornerSize = 30;\r\nfabric.Object.prototype.transparentCorners = false;\r\nfabric.Object.prototype.borderScaleFactor = 5;\r\nfabric.Object.prototype.rotatingPointOffset = 120;\r\nfabric.Object.prototype.borderColor = \"rgba(235,88,171,0.75)\";\r\nfabric.Object.prototype.cornerColor = \"rgba(235,88,171,0.75)\";\r\n\r\nvar pwentkFabric = {\r\n\tnewSprite:function(sprite){\r\n\t\tlet spriteImg = sprite.getShape().img;\r\n\t\tif(sprite.getShape().loaded){\r\n\t\t\tcanvas.add(new fabric.Image(spriteImg, pwentkFabric.spriteToObject(sprite)));\r\n\t\t}else{\r\n\t\t\tspriteImg.onload = function(){\r\n\t\t\t\tcanvas.add(new fabric.Image(spriteImg, pwentkFabric.spriteToObject(sprite)));\r\n\t\t\t\tsprite.getShape().loaded = true;\r\n\t\t\t\tpwentkFabric.spriteReDraw(sprite);\r\n\t\t\t};\r\n\t\t}\r\n\t},\r\n\tspriteToObject:function(sprite){\r\n\t\treturn {\r\n\t\t\tsprite: sprite,\r\n\t\t\tscaleX: sprite.scaleX,\r\n\t\t\tscaleY: sprite.scaleY,\r\n\t\t\tleft: sprite.x+ canvas.width/2,\r\n\t\t\ttop: -sprite.y+ canvas.height/2,\r\n\t\t\tangle: sprite.rotation,\r\n\t\t\toriginX: \"center\",\r\n\t\t\toriginY: \"center\"\r\n\t\t};\r\n\t},\r\n\tspriteReDraw:function(sprite){\r\n\t\tlet targetObject = canvas.getObjects().filter(val => {return val.sprite == sprite;})[0];\r\n\t\tif(targetObject){\r\n\t\t\tif(sprite.visible && sprite.scene == main.nowScene()){\r\n\t\t\t\ttargetObject.set(pwentkFabric.spriteToObject(sprite));\r\n\t\t\t}else{\r\n\t\t\t\tcanvas.remove(targetObject);\r\n\t\t\t}\r\n\t\t}else if(sprite.visible && sprite.scene == main.nowScene()){\r\n\t\t\tpwentkFabric.newSprite(sprite);\r\n\t\t}\r\n\t\tcanvas.renderAll();\r\n\t}\r\n};\r\n\r\npwentk.on(\"newSprite\", pwentkFabric.newSprite);\r\n\r\npwentk.on(\"changed\", pwentkFabric.spriteReDraw);\r\n\r\npwentk.on(\"sceneChanged\", function(project){\r\n\tconsole.log(canvas.getObjects());\r\n\tcanvas.remove(...canvas.getObjects());\r\n\tfor(var i in main.nowScene().sprites){\r\n\t\tif(main.nowScene().sprites[i].visible){\r\n\t\t\tpwentkFabric.newSprite(main.nowScene().sprites[i]);\r\n\t\t}\r\n\t}\r\n\tcanvas.renderAll();\r\n});\r\ncanvas.on(\"object:modified\", function(event){\r\n\tvar sprite = event.target.sprite;\r\n\tif(sprite){\r\n\t\tsprite\r\n\t\t.setScaleX(event.target.scaleX, false)\r\n\t\t.setScaleY(event.target.scaleY, false)\r\n\t\t.setX(event.target.left- canvas.width/2, false)\r\n\t\t.setY(-event.target.top+ canvas.height/2, false)\r\n\t\t.setRotation(event.target.angle);\r\n\t}\r\n});",
@@ -616,7 +1043,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 51,
+    "__docId__": 78,
     "kind": "variable",
     "name": "canvas",
     "memberof": "src/pwentkFabric.js",
@@ -637,7 +1064,7 @@
     "ignore": true
   },
   {
-    "__docId__": 52,
+    "__docId__": 79,
     "kind": "variable",
     "name": "pwentkFabric",
     "memberof": "src/pwentkFabric.js",
@@ -658,6 +1085,930 @@
     "ignore": true
   },
   {
+    "__docId__": 80,
+    "kind": "file",
+    "name": "src/scene.js",
+    "content": "import pwentk from \"./global.js\";\r\n\r\nexport default class Scene{\r\n\tconstructor(options){\r\n\t\tthis.name = options.name;\r\n\t\tthis.sprites = [];\r\n\t}\r\n\r\n\tnewSprite(sprite){\r\n\t\tsprite.setScene(this);\r\n\t\tthis.sprites.push(sprite);\r\n\t\tpwentk.fire(\"newSprite\", sprite);\r\n\t}\r\n}",
+    "static": true,
+    "longname": "C:/Pwentk/src/scene.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 81,
+    "kind": "class",
+    "name": "Scene",
+    "memberof": "src/scene.js",
+    "static": true,
+    "longname": "src/scene.js~Scene",
+    "access": "public",
+    "export": true,
+    "importPath": "pwentk/src/scene.js",
+    "importStyle": "Scene",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 82,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/scene.js~Scene",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/scene.js~Scene#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true
+  },
+  {
+    "__docId__": 83,
+    "kind": "member",
+    "name": "name",
+    "memberof": "src/scene.js~Scene",
+    "static": false,
+    "longname": "src/scene.js~Scene#name",
+    "access": "public",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 84,
+    "kind": "member",
+    "name": "sprites",
+    "memberof": "src/scene.js~Scene",
+    "static": false,
+    "longname": "src/scene.js~Scene#sprites",
+    "access": "public",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 85,
+    "kind": "method",
+    "name": "newSprite",
+    "memberof": "src/scene.js~Scene",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/scene.js~Scene#newSprite",
+    "access": "public",
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "params": [
+      {
+        "name": "sprite",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 86,
+    "kind": "file",
+    "name": "src/sprite.js",
+    "content": "import pwentk from \"./global.js\";\r\n\r\nexport default class Sprite{\r\n\tconstructor(name, visible, shapes, shapeNumber, scaleX, scaleY, x, y, z, rotation){\r\n\t\tthis.setName(name, false);\r\n\t\tthis.setVisible(visible || true, false);\r\n\t\tthis.shapes = shapes || [{name:\"Sample image\",img:this.genImg(\"https://playentry.org/lib/entry-js/images/media/entrybot1.png\")}];\r\n\t\tthis.setShape(shapeNumber || 0, false);\r\n\t\tthis.setScaleX(scaleX || 1, false);\r\n\t\tthis.setScaleY(scaleY || 1, false);\r\n\t\tthis.setX(x || 0, false);\r\n\t\tthis.setY(y || 0, false);\r\n\t\tthis.setZ(z || 0, false);\r\n\t\tthis.setRotation(rotation || 0, false);\r\n\t}\r\n\r\n\tsetScene(scene){\r\n\t\tthis.scene = scene;\r\n\t}\r\n\tsetName(name, doEvent = true){\r\n\t\tif(!name){\r\n\t\t\tthis.setName(`스프라이트 ${pwentk.genId()}`, doEvent);\r\n\t\t\tpwentk.genErr(22,this);\r\n\t\t}/*else if(pwentk.sprites.some(val=>{return val.name==String(name);})){\r\n\t\t\tthis.setName(`스프라이트 ${this.id}`, doEvent);\r\n\t\t\tpwentk.genErr(11,this);\r\n\t\t}*/else{\r\n\t\t\tthis.name = String(name);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\tshow(doEvent = true){\r\n\t\tthis.visible = true;\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\thide(doEvent = true){\r\n\t\tthis.visible = false;\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\tsetVisible(boolean, doEvent = true){\r\n\t\tthis.visible = Boolean(boolean);\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\tsetShape(n, doEvent = true){\r\n\t\tif(!isNaN(n)){\r\n\t\t\tif(this.shapes[Number(n)]){\r\n\t\t\t\tthis.shapeNumber = Number(n);\r\n\t\t\t}else{\r\n\t\t\t\tpwentk.genErr(14,this);\r\n\t\t\t}\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\tgetShape(){\r\n\t\treturn this.shapes[this.shapeNumber];\r\n\t}\r\n\tsetScaleX(scaleX, doEvent = true){\r\n\t\tif(!isNaN(scaleX)){\r\n\t\t\tthis.scaleX = Number(scaleX);\r\n\t\t}else{\r\n\t\t\tpwentk.genErr(21,this);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\tsetScaleY(scaleY, doEvent = true){\r\n\t\tif(!isNaN(scaleY)){\r\n\t\t\tthis.scaleY = Number(scaleY);\r\n\t\t}else{\r\n\t\t\tpwentk.genErr(21,this);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\t//좌표\r\n\tsetX(x, doEvent = true){\r\n\t\tif(!isNaN(x)){\r\n\t\t\tthis.x = Number(x);\r\n\t\t}else{\r\n\t\t\tpwentk.genErr(21,this);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\tsetY(y, doEvent = true){\r\n\t\tif(!isNaN(y)){\r\n\t\t\tthis.y = Number(y);\r\n\t\t}else{\r\n\t\t\tpwentk.genErr(21,this);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\tsetZ(z, doEvent = true){\r\n\t\tif(!isNaN(z)){\r\n\t\t\tthis.z = Number(z);\r\n\t\t}\r\n\t\telse{\r\n\t\t\tpwentk.genErr(21,this);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\tsetRotation(rotation, doEvent = true){\r\n\t\tif(!isNaN(rotation)){\r\n\t\t\tthis.rotation = Number(rotation);\r\n\t\t}\r\n\t\telse{\r\n\t\t\tpwentk.genErr(21,this);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\taddX(x, doEvent = true){\r\n\t\tif(!isNaN(x)){\r\n\t\t\tthis.x += Number(x);\r\n\t\t}\r\n\t\telse{\r\n\t\t\tpwentk.genErr(21,this);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\taddY(y, doEvent = true){\r\n\t\tif(!isNaN(y)){\r\n\t\t\tthis.y += Number(y);\r\n\t\t}\r\n\t\telse{\r\n\t\t\tpwentk.genErr(21,this);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\taddZ(z, doEvent = true){\r\n\t\tif(!isNaN(z)){\r\n\t\t\tthis.z += Number(z);\r\n\t\t}\r\n\t\telse{\r\n\t\t\tpwentk.genErr(21,this);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\taddRotation(rotation, doEvent = true){\r\n\t\tif(!isNaN(rotation)){\r\n\t\t\tthis.rotation += Number(rotation);\r\n\t\t}\r\n\t\telse{\r\n\t\t\tpwentk.genErr(21,this);\r\n\t\t}\r\n\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\treturn this;\r\n\t}\r\n\r\n\tgenImg(src){\r\n\t\tlet img = new Image();\r\n\t\timg.src = src;\r\n\t\treturn img;\r\n\t}\r\n\r\n}",
+    "static": true,
+    "longname": "C:/Pwentk/src/sprite.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 87,
+    "kind": "class",
+    "name": "Sprite",
+    "memberof": "src/sprite.js",
+    "static": true,
+    "longname": "src/sprite.js~Sprite",
+    "access": "public",
+    "export": true,
+    "importPath": "pwentk/src/sprite.js",
+    "importStyle": "Sprite",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 88,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true
+  },
+  {
+    "__docId__": 89,
+    "kind": "member",
+    "name": "shapes",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#shapes",
+    "access": "public",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 90,
+    "kind": "method",
+    "name": "setScene",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#setScene",
+    "access": "public",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "params": [
+      {
+        "name": "scene",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 91,
+    "kind": "member",
+    "name": "scene",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#scene",
+    "access": "public",
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 92,
+    "kind": "method",
+    "name": "setName",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#setName",
+    "access": "public",
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 93,
+    "kind": "member",
+    "name": "name",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#name",
+    "access": "public",
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 94,
+    "kind": "method",
+    "name": "show",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#show",
+    "access": "public",
+    "description": null,
+    "lineNumber": 33,
+    "undocument": true,
+    "params": [
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 95,
+    "kind": "member",
+    "name": "visible",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#visible",
+    "access": "public",
+    "description": null,
+    "lineNumber": 34,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 96,
+    "kind": "method",
+    "name": "hide",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#hide",
+    "access": "public",
+    "description": null,
+    "lineNumber": 38,
+    "undocument": true,
+    "params": [
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 98,
+    "kind": "method",
+    "name": "setVisible",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#setVisible",
+    "access": "public",
+    "description": null,
+    "lineNumber": 43,
+    "undocument": true,
+    "params": [
+      {
+        "name": "boolean",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 100,
+    "kind": "method",
+    "name": "setShape",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#setShape",
+    "access": "public",
+    "description": null,
+    "lineNumber": 48,
+    "undocument": true,
+    "params": [
+      {
+        "name": "n",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 101,
+    "kind": "member",
+    "name": "shapeNumber",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#shapeNumber",
+    "access": "public",
+    "description": null,
+    "lineNumber": 51,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 102,
+    "kind": "method",
+    "name": "getShape",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#getShape",
+    "access": "public",
+    "description": null,
+    "lineNumber": 59,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 103,
+    "kind": "method",
+    "name": "setScaleX",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#setScaleX",
+    "access": "public",
+    "description": null,
+    "lineNumber": 62,
+    "undocument": true,
+    "params": [
+      {
+        "name": "scaleX",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 104,
+    "kind": "member",
+    "name": "scaleX",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#scaleX",
+    "access": "public",
+    "description": null,
+    "lineNumber": 64,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 105,
+    "kind": "method",
+    "name": "setScaleY",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#setScaleY",
+    "access": "public",
+    "description": null,
+    "lineNumber": 71,
+    "undocument": true,
+    "params": [
+      {
+        "name": "scaleY",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 106,
+    "kind": "member",
+    "name": "scaleY",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#scaleY",
+    "access": "public",
+    "description": null,
+    "lineNumber": 73,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 107,
+    "kind": "method",
+    "name": "setX",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#setX",
+    "access": "public",
+    "description": null,
+    "lineNumber": 81,
+    "undocument": true,
+    "params": [
+      {
+        "name": "x",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 108,
+    "kind": "member",
+    "name": "x",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#x",
+    "access": "public",
+    "description": null,
+    "lineNumber": 83,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 109,
+    "kind": "method",
+    "name": "setY",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#setY",
+    "access": "public",
+    "description": null,
+    "lineNumber": 90,
+    "undocument": true,
+    "params": [
+      {
+        "name": "y",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 110,
+    "kind": "member",
+    "name": "y",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#y",
+    "access": "public",
+    "description": null,
+    "lineNumber": 92,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 111,
+    "kind": "method",
+    "name": "setZ",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#setZ",
+    "access": "public",
+    "description": null,
+    "lineNumber": 99,
+    "undocument": true,
+    "params": [
+      {
+        "name": "z",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 112,
+    "kind": "member",
+    "name": "z",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#z",
+    "access": "public",
+    "description": null,
+    "lineNumber": 101,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 113,
+    "kind": "method",
+    "name": "setRotation",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#setRotation",
+    "access": "public",
+    "description": null,
+    "lineNumber": 109,
+    "undocument": true,
+    "params": [
+      {
+        "name": "rotation",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 114,
+    "kind": "member",
+    "name": "rotation",
+    "memberof": "src/sprite.js~Sprite",
+    "static": false,
+    "longname": "src/sprite.js~Sprite#rotation",
+    "access": "public",
+    "description": null,
+    "lineNumber": 111,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 115,
+    "kind": "method",
+    "name": "addX",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#addX",
+    "access": "public",
+    "description": null,
+    "lineNumber": 119,
+    "undocument": true,
+    "params": [
+      {
+        "name": "x",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 117,
+    "kind": "method",
+    "name": "addY",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#addY",
+    "access": "public",
+    "description": null,
+    "lineNumber": 129,
+    "undocument": true,
+    "params": [
+      {
+        "name": "y",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 119,
+    "kind": "method",
+    "name": "addZ",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#addZ",
+    "access": "public",
+    "description": null,
+    "lineNumber": 139,
+    "undocument": true,
+    "params": [
+      {
+        "name": "z",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 121,
+    "kind": "method",
+    "name": "addRotation",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#addRotation",
+    "access": "public",
+    "description": null,
+    "lineNumber": 149,
+    "undocument": true,
+    "params": [
+      {
+        "name": "rotation",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "doEvent",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": true,
+        "defaultValue": "true"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 123,
+    "kind": "method",
+    "name": "genImg",
+    "memberof": "src/sprite.js~Sprite",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/sprite.js~Sprite#genImg",
+    "access": "public",
+    "description": null,
+    "lineNumber": 160,
+    "undocument": true,
+    "params": [
+      {
+        "name": "src",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
     "kind": "index",
     "content": "Pwentk\r\n======\r\nPwentk은 높은 성능과 자유도를 추구하는 블록코딩 플랫폼입니다.  \r\nPwentk은 아직 개발중이며 대부분의 기능은 완성되지 않았습니다.  \r\n<https://pwen.tk/docs/make>에서 현재까지 개발된 부분을 볼 수 있습니다.\r\n",
     "longname": "C:\\Pwentk\\README.md",
@@ -667,7 +2018,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"pwentk\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Pwentk\\r ======\\r Pwentk은 높은 성능과 자유도를 추구하는 블록코딩 플랫폼입니다.  \\r Pwentk은 아직 개발중이며 대부분의 기능은 완성되지 않았습니다.  \\r <https://pwen.tk/docs/make>에서 현재까지 개발된 부분을 볼 수 있습니다.\",\n  \"main\": \"pwentk.js\",\n  \"directories\": {\n    \"doc\": \"docs\"\n  },\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/EntryDark/Pwentk.git\"\n  },\n  \"author\": \"\",\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/EntryDark/Pwentk/issues\"\n  },\n  \"homepage\": \"https://github.com/EntryDark/Pwentk#readme\",\n  \"dependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"pwentk\",\n  \"version\": \"1.0.0\",\n  \"description\": \"Pwentk\\r ======\\r Pwentk은 높은 성능과 자유도를 추구하는 블록코딩 플랫폼입니다.  \\r Pwentk은 아직 개발중이며 대부분의 기능은 완성되지 않았습니다.  \\r <https://pwen.tk/docs/make>에서 현재까지 개발된 부분을 볼 수 있습니다.\",\n  \"main\": \"pwentk.js\",\n  \"directories\": {\n    \"doc\": \"docs\"\n  },\n  \"scripts\": {\n    \"build\": \"webpack\",\n    \"devserver\": \"webpack-dev-server --open --progress\",\n    \"esdoc\": \"./node_modules/.bin/esdoc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/EntryDark/Pwentk.git\"\n  },\n  \"author\": \"\",\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/EntryDark/Pwentk/issues\"\n  },\n  \"homepage\": \"https://github.com/EntryDark/Pwentk#readme\",\n  \"dependencies\": {},\n  \"devDependencies\": {\n    \"@babel/core\": \"^7.4.0\",\n    \"@babel/preset-env\": \"^7.4.2\",\n    \"babel-loader\": \"^8.0.5\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"webpack\": \"^4.29.6\",\n    \"webpack-cli\": \"^3.3.0\",\n    \"webpack-dev-server\": \"^3.2.1\"\n  }\n}\n",
     "longname": "C:\\Pwentk\\package.json",
     "name": "package.json",
     "static": true,

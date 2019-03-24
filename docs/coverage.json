@@ -1,12 +1,54 @@
 {
-  "coverage": "33.33%",
-  "expectCount": 3,
-  "actualCount": 1,
+  "coverage": "0%",
+  "expectCount": 61,
+  "actualCount": 0,
   "files": {
-    "src/pwentk.js": {
+    "src/block.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ]
+    },
+    "src/blockset.js": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    "src/global.js": {
       "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "src/project.js": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        10,
+        14,
+        17,
+        20
+      ]
     },
     "src/pwentkFabric.js": {
       "expectCount": 2,
@@ -14,6 +56,54 @@
       "undocumentLines": [
         3,
         13
+      ]
+    },
+    "src/scene.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4,
+        5,
+        6,
+        9
+      ]
+    },
+    "src/sprite.js": {
+      "expectCount": 31,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4,
+        7,
+        17,
+        18,
+        20,
+        28,
+        33,
+        34,
+        38,
+        43,
+        48,
+        51,
+        59,
+        62,
+        64,
+        71,
+        73,
+        81,
+        83,
+        90,
+        92,
+        99,
+        101,
+        109,
+        111,
+        119,
+        129,
+        139,
+        149,
+        160
       ]
     }
   }

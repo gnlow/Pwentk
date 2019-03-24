@@ -1,0 +1,75 @@
+:root.light {
+  --main-background: #fff;
+  --main-color: #000;
+  --main-border-color: #c9d0d5;
+  --main-link-color: #3300d1;
+  --main-focus-color: #7588fb;
+
+  --main-header-background: #3300d1;
+  --main-header-color: #fff;
+  --main-header-border-color: #010049;
+  --main-header-link-hover-shade: rgba(255, 255, 255, 0.1);
+  --main-header-link-active-shade: rgba(255, 255, 255, 0.2);
+  --main-header-shadow: 0 0.175rem 0.25rem rgba(0, 0, 0, 0.35), 0 0.25rem 0.5rem rgba(0, 0, 0, 0.65);
+
+  --left-sidebar-background: #f2f5f9;
+  --left-sidebar-background-active: #acb4b7;
+  --left-sidebar-color-active: #000;
+  --left-sidebar-color: #000;
+  --left-sidebar-border-color: #c9d0d5;
+  --left-sidebar-indent-background: none;
+  --left-sidebar-shadow: none;
+
+  --right-sidebar-background: #212429;
+  --right-sidebar-background-active: #16181f;
+  --right-sidebar-color-active: #fff;
+  --right-sidebar-color: #fff;
+  --right-sidebar-border-color: #2d3038;
+  --right-sidebar-indent-background: none;
+  --right-sidebar-shadow: -0.125rem 0 0.25rem rgba(0, 0, 0, 0.25), -0.175rem 0 0.35rem rgba(0, 0, 0, 0.45);
+
+  --card-link-hover-shade: rgba(0, 0, 0, 0.1);
+
+  --search-separator-background: #3300d1;
+  --search-separator-color: #fff;
+  --search-result-background: #f2f5f9;
+  --search-result-color: #000;
+  --search-result-border-color: #c9d0d5;
+  --search-result-selected-background: #c9d0d5;
+  --search-result-selected-color: #000;
+  --search-result-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.35), 0 0.5rem 0.5rem rgba(0, 0, 0, 0.65);
+  --search-result-hover-shade: rgba(0, 0, 0, 0.1);
+  --search-result-focus-color: #7588fb;
+
+  --main-code-background: #c9d0d5;
+  --main-code-color: #0d6663;
+  --main-code-border-color: #c9d0d5;
+
+  --pretty-code-error-background: #7f012a;
+  --pretty-code-error-color: #fff;
+
+  --kind-background: #16181f;
+  --kind-color: #696e76;
+
+  --kind-function-background: hsl(0, 80%, 70%);
+  --kind-function-color: hsl(0, 90%, 20%);
+
+  --kind-class-background: hsl(30, 80%, 70%);
+  --kind-class-color: hsl(30, 90%, 20%);
+
+  --kind-variable-background: hsl(60, 80%, 70%);
+  --kind-variable-color: hsl(60, 90%, 20%);
+
+  --table-color: #000;
+  --table-background: #f2f5f9;
+  --table-border-color: #c9d0d5;
+  --td-color: #000;
+  --td-background: #f2f5f9;
+  --td-border-color: #c9d0d5;
+  --thead-color: #000;
+  --thead-background: #acb4b7;
+  --thead-border-color: #c9d0d5;
+
+  --light-switch-color: #fff;
+  --light-switch-background: #212429;
+}
