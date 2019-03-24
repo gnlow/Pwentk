@@ -564,6 +564,100 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/pwentk.js",
+    "content": "/* globals Image */\r\n/**\r\n * Test\r\n * @property\r\n */\r\nvar pwentk = {\r\n\t/**\r\n\t * Test\r\n\t */\r\n\t\t Sprite: class{\r\n\t\t/**\r\n\t\t * Test\r\n\t\t */\r\n\t\t constructor(name, visible, shapes, shapeNumber, scaleX, scaleY, x, y, z, rotation){\r\n\t\t \tthis.setName(name, false);\r\n\t\t \tthis.setVisible(visible || true, false);\r\n\t\t \tthis.shapes = shapes || [{name:\"Sample image\",img:this.genImg(\"https://playentry.org/lib/entry-js/images/media/entrybot1.png\")}];\r\n\t\t \tthis.setShape(shapeNumber || 0, false);\r\n\t\t \tthis.setScaleX(scaleX || 1, false);\r\n\t\t \tthis.setScaleY(scaleY || 1, false);\r\n\t\t \tthis.setX(x || 0, false);\r\n\t\t \tthis.setY(y || 0, false);\r\n\t\t \tthis.setZ(z || 0, false);\r\n\t\t \tthis.setRotation(rotation || 0, false);\r\n\t\t }\r\n\r\n\t\t setScene(scene){\r\n\t\t \tthis.scene = scene;\r\n\t\t }\r\n\t\t setName(name, doEvent = true){\r\n\t\t \tif(!name){\r\n\t\t \t\tthis.setName(`스프라이트 ${pwentk.genId()}`, doEvent);\r\n\t\t \t\tpwentk.genErr(22,this);\r\n\t\t\t}/*else if(pwentk.sprites.some(val=>{return val.name==String(name);})){\r\n\t\t\t\tthis.setName(`스프라이트 ${this.id}`, doEvent);\r\n\t\t\t\tpwentk.genErr(11,this);\r\n\t\t\t}*/else{\r\n\t\t\t\tthis.name = String(name);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tshow(doEvent = true){\r\n\t\t\tthis.visible = true;\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\thide(doEvent = true){\r\n\t\t\tthis.visible = false;\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetVisible(boolean, doEvent = true){\r\n\t\t\tthis.visible = Boolean(boolean);\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetShape(n, doEvent = true){\r\n\t\t\tif(!isNaN(n)){\r\n\t\t\t\tif(this.shapes[Number(n)]){\r\n\t\t\t\t\tthis.shapeNumber = Number(n);\r\n\t\t\t\t}else{\r\n\t\t\t\t\tpwentk.genErr(14,this);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tgetShape(){\r\n\t\t\treturn this.shapes[this.shapeNumber];\r\n\t\t}\r\n\t\tsetScaleX(scaleX, doEvent = true){\r\n\t\t\tif(!isNaN(scaleX)){\r\n\t\t\t\tthis.scaleX = Number(scaleX);\r\n\t\t\t}else{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetScaleY(scaleY, doEvent = true){\r\n\t\t\tif(!isNaN(scaleY)){\r\n\t\t\t\tthis.scaleY = Number(scaleY);\r\n\t\t\t}else{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\t//좌표\r\n\t\tsetX(x, doEvent = true){\r\n\t\t\tif(!isNaN(x)){\r\n\t\t\t\tthis.x = Number(x);\r\n\t\t\t}else{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetY(y, doEvent = true){\r\n\t\t\tif(!isNaN(y)){\r\n\t\t\t\tthis.y = Number(y);\r\n\t\t\t}else{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetZ(z, doEvent = true){\r\n\t\t\tif(!isNaN(z)){\r\n\t\t\t\tthis.z = Number(z);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\tsetRotation(rotation, doEvent = true){\r\n\t\t\tif(!isNaN(rotation)){\r\n\t\t\t\tthis.rotation = Number(rotation);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\taddX(x, doEvent = true){\r\n\t\t\tif(!isNaN(x)){\r\n\t\t\t\tthis.x += Number(x);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\taddY(y, doEvent = true){\r\n\t\t\tif(!isNaN(y)){\r\n\t\t\t\tthis.y += Number(y);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\taddZ(z, doEvent = true){\r\n\t\t\tif(!isNaN(z)){\r\n\t\t\t\tthis.z += Number(z);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\t\taddRotation(rotation, doEvent = true){\r\n\t\t\tif(!isNaN(rotation)){\r\n\t\t\t\tthis.rotation += Number(rotation);\r\n\t\t\t}\r\n\t\t\telse{\r\n\t\t\t\tpwentk.genErr(21,this);\r\n\t\t\t}\r\n\t\t\tif(doEvent){pwentk.fire(\"changed\", this);}\r\n\t\t\treturn this;\r\n\t\t}\r\n\r\n\t\tgenImg(src){\r\n\t\t\tlet img = new Image();\r\n\t\t\timg.src = src;\r\n\t\t\treturn img;\r\n\t\t}\r\n\r\n\t},\r\n\tBlockSet: class{\r\n\t\tconstructor(options){\r\n\t\t\tthis.name = options.name;\r\n\t\t\tthis.template = options.template;\r\n\t\t\tthis.func = options.func;\r\n\t\t\tthis.param = \r\n\t\t\tpwentk.nArray(this.template.match(/(?<=\\(\\()(.*?)(?=\\)\\))/g))\r\n\t\t\t.map(name => ({name: name, type: \"string\", data: \"0\"}))\r\n\t\t\t.concat(\r\n\t\t\t\tpwentk.nArray(this.template.match(/(?<=\\<\\<)(.*?)(?=\\>\\>)/g))\r\n\t\t\t\t.map(name => ({name: name, type: \"boolean\", data: true}))\r\n\t\t\t\t)\r\n\t\t\t.concat(\r\n\t\t\t\tpwentk.nArray(this.template.match(/(?<=\\{\\{)(.*?)(?=\\}\\})/g))\r\n\t\t\t\t.map(name => ({name: name, type: \"function\", data: function(){}}))\r\n\t\t\t\t);\r\n\t\t}\r\n\t},\r\n\tBlock: class{\r\n\t\tconstructor(parent){\r\n\t\t\tthis.name = parent.name;\r\n\t\t\tthis.template = parent.template;\r\n\t\t\tthis.param = parent.param;\r\n\t\t\tthis.innerBlock = this.param.filter(val=>val.type==\"function\")\r\n\t\t}\r\n\t\tgetPath(text){\r\n\t\t\tvar output = \"\";\r\n\t\t\toutput += `M0 0 l 5 5 v -4 \r\n\t\t\ta 1 1 90 0 1 1 -1  \r\n\t\t\th 70\r\n\t\t\ta 5 5 180 0 1 0 10 `;\r\n\t\t\toutput += `H 11 `;\r\n\r\n\t\t\tif(this.innerBlock.length > 0){\r\n\t\t\t\toutput += `a 1 1 90 0 0 -1 1\r\n\t\t\t\tv 4\r\n\t\t\t\tl -5 -5`;\r\n\t\t\t\tfor(var i=0;i<this.innerBlock.length-1;i++){\r\n\t\t\t\t\toutput += `v 10 \r\n\t\t\t\t\tl 5 5 v -4 \r\n\t\t\t\t\ta 1 1 90 0 1 1 -1  \r\n\t\t\t\t\th 20 \r\n\t\t\t\t\ta 5 5 180 0 1 0 10 \r\n\t\t\t\t\tH 11 \r\n\t\t\t\t\ta 1 1 90 0 0 -1 1 \r\n\t\t\t\t\tv 4 \r\n\t\t\t\t\tl -5 -5 `;\r\n\t\t\t\t}\r\n\t\t\t\toutput += `v 10 \r\n\t\t\t\tl 5 5 v -4 \r\n\t\t\t\ta 1 1 90 0 1 1 -1  \r\n\t\t\t\th 20 \r\n\t\t\t\ta 5 5 180 0 1 0 10 `;\r\n\t\t\t}\r\n\t\t\toutput += `H 6 a 1 1 90 0 0 -1 1 v 5 l -5 -5\r\n\t\t\tZ`;\r\n\t\t\treturn output;\r\n\t\t}\r\n\t},\r\n\tScene: class{\r\n\t\tconstructor(options){\r\n\t\t\tthis.name = options.name;\r\n\t\t\tthis.sprites = [];\r\n\t\t}\r\n\r\n\t\tnewSprite(sprite){\r\n\t\t\tsprite.setScene(this);\r\n\t\t\tthis.sprites.push(sprite);\r\n\t\t\tpwentk.fire(\"newSprite\", sprite);\r\n\t\t}\r\n\t},\r\n\tProject: class{\r\n\t\tconstructor(options){\r\n\t\t\tthis.name = options.name;\r\n\t\t\tthis.scenes = [new pwentk.Scene({\"name\": \"장면 1\"})];\r\n\t\t\tthis.nowSceneNo = 0;\r\n\t\t\tpwentk.fire(\"sceneChanged\", this);\r\n\t\t}\r\n\t\tsetNowScene(sceneNo){\r\n\t\t\tthis.nowSceneNo = sceneNo;\r\n\t\t\tpwentk.fire(\"sceneChanged\", this);\r\n\t\t}\r\n\t\tnowScene(){\r\n\t\t\treturn this.scenes[this.nowSceneNo];\r\n\t\t}\r\n\t\tnewScene(name){\r\n\t\t\tthis.scenes.push(new pwentk.Scene({\"name\": name}));\r\n\t\t}\r\n\t\tdeleteScene(sceneNo){\r\n\t\t\tthis.scenes.splice(sceneNo, 1);\r\n\t\t\tif(this.nowSceneNo > this.scenes.length - 1){\r\n\t\t\t\tthis.setNowScene(this.scenes.length - 1);\r\n\t\t\t}else if(this.nowSceneNo > sceneNo){\r\n\t\t\t\tthis.setNowScene(this.nowSceneNo - 1);\r\n\t\t\t}\r\n\t\t}\r\n\t},\r\n\tgenErr: function(errCode, errSprite){\r\n\t\tif(errSprite){\r\n\t\t\tconsole.warn(new Error(`\"${errSprite.name}\" 스프라이트에서 에러 #${errCode} : \"${pwentk.errorCode[errCode]}\"`));\r\n\t\t}else{\r\n\t\t\tconsole.warn(new Error(`에러 #${errCode} : \"${pwentk.errorCode[errCode]}\"`));\r\n\t\t}\r\n\t},\r\n\terrorCode: {\r\n\t\t\"10\": \"잘못된 참조\",\r\n\t\t\"11\": \"중복된 스프라이트 이름\",\r\n\t\t\"12\": \"존재하지 않는 스프라이트 번호\",\r\n\t\t\"13\": \"존재하지 않는 스프라이트 이름\",\r\n\t\t\"14\": \"존재하지 않는 모양 번호\",\r\n\t\t\"15\": \"존재하지 않는 모양 이름\",\r\n\r\n\t\t\"20\": \"잘못된 입력 형식\",\r\n\t\t\"21\": \"잘못된 입력 형식 (Number여야 함)\",\r\n\t\t\"22\": \"스프라이트 이름이 입력되지 않음\",\r\n\t\t\"23\": \"잘못된 입력 형식 (String여야 함)\"\r\n\t},\r\n\tevent: {\r\n\t\tnewSprite: [],\r\n\t\tchanged: [],\r\n\t\tsceneChanged: []\r\n\t},\r\n\ton: function(eventName, callback){\r\n\t\tthis.event[eventName].push(callback);\r\n\t},\r\n\tfire: function(eventName, param){\r\n\t\tconsole.log(`\"${eventName}\" event fired`);\r\n\t\tfor(var i in this.event[eventName]){\r\n\t\t\tthis.event[eventName][i](param);\r\n\t\t}\r\n\t},\r\n\tgetSprite: function(scene, info, option = \"name\"){\r\n\t\tswitch(info.constructor.name){\r\n\t\t\tcase \"Number\":{\r\n\t\t\t\tlet returnTemp = scene.sprites[info];\r\n\t\t\t\tif(returnTemp){\r\n\t\t\t\t\treturn returnTemp;\r\n\t\t\t\t}else{\r\n\t\t\t\t\tpwentk.genErr(12);\r\n\t\t\t\t}\r\n\t\t\t\tbreak;\r\n\t\t\t}\r\n\t\t\tcase \"String\":{\r\n\t\t\t\tlet returnTemp = scene.sprites.filter(val => {return val[option] == info;})[0];\r\n\t\t\t\tif(returnTemp){\r\n\t\t\t\t\treturn returnTemp;\r\n\t\t\t\t}else{\r\n\t\t\t\t\tpwentk.genErr(13);\r\n\t\t\t\t}\r\n\t\t\t\tbreak;\r\n\t\t\t}\r\n\t\t}\r\n\t},\r\n\tnArray: arr => arr?arr:[],\r\n\tgenId: () => Math.random().toString(36).substr(2, 5)\r\n};",
+    "static": true,
+    "longname": "C:/Pwentk/src/pwentk.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "variable",
+    "name": "pwentk",
+    "memberof": "src/pwentk.js",
+    "static": true,
+    "longname": "src/pwentk.js~pwentk",
+    "access": "public",
+    "export": false,
+    "importPath": "pwentk/src/pwentk.js",
+    "importStyle": null,
+    "description": "Test",
+    "lineNumber": 6,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "description": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"Sprite\": *, \"BlockSet\": *, \"Block\": *, \"Scene\": *, \"Project\": *, \"genErr\": *, \"errorCode\": *, \"event\": *, \"on\": *, \"fire\": *, \"getSprite\": *, \"nArray\": *, \"genId\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 50,
+    "kind": "file",
+    "name": "src/pwentkFabric.js",
+    "content": "/* globals fabric */\r\n/* globals pwentk */\r\nvar canvas = new fabric.Canvas(\"mainCanvas\");\r\ncanvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});\r\n\r\nfabric.Object.prototype.cornerSize = 30;\r\nfabric.Object.prototype.transparentCorners = false;\r\nfabric.Object.prototype.borderScaleFactor = 5;\r\nfabric.Object.prototype.rotatingPointOffset = 120;\r\nfabric.Object.prototype.borderColor = \"rgba(235,88,171,0.75)\";\r\nfabric.Object.prototype.cornerColor = \"rgba(235,88,171,0.75)\";\r\n\r\nvar pwentkFabric = {\r\n\tnewSprite:function(sprite){\r\n\t\tlet spriteImg = sprite.getShape().img;\r\n\t\tif(sprite.getShape().loaded){\r\n\t\t\tcanvas.add(new fabric.Image(spriteImg, pwentkFabric.spriteToObject(sprite)));\r\n\t\t}else{\r\n\t\t\tspriteImg.onload = function(){\r\n\t\t\t\tcanvas.add(new fabric.Image(spriteImg, pwentkFabric.spriteToObject(sprite)));\r\n\t\t\t\tsprite.getShape().loaded = true;\r\n\t\t\t\tpwentkFabric.spriteReDraw(sprite);\r\n\t\t\t};\r\n\t\t}\r\n\t},\r\n\tspriteToObject:function(sprite){\r\n\t\treturn {\r\n\t\t\tsprite: sprite,\r\n\t\t\tscaleX: sprite.scaleX,\r\n\t\t\tscaleY: sprite.scaleY,\r\n\t\t\tleft: sprite.x+ canvas.width/2,\r\n\t\t\ttop: -sprite.y+ canvas.height/2,\r\n\t\t\tangle: sprite.rotation,\r\n\t\t\toriginX: \"center\",\r\n\t\t\toriginY: \"center\"\r\n\t\t};\r\n\t},\r\n\tspriteReDraw:function(sprite){\r\n\t\tlet targetObject = canvas.getObjects().filter(val => {return val.sprite == sprite;})[0];\r\n\t\tif(targetObject){\r\n\t\t\tif(sprite.visible && sprite.scene == main.nowScene()){\r\n\t\t\t\ttargetObject.set(pwentkFabric.spriteToObject(sprite));\r\n\t\t\t}else{\r\n\t\t\t\tcanvas.remove(targetObject);\r\n\t\t\t}\r\n\t\t}else if(sprite.visible && sprite.scene == main.nowScene()){\r\n\t\t\tpwentkFabric.newSprite(sprite);\r\n\t\t}\r\n\t\tcanvas.renderAll();\r\n\t}\r\n};\r\n\r\npwentk.on(\"newSprite\", pwentkFabric.newSprite);\r\n\r\npwentk.on(\"changed\", pwentkFabric.spriteReDraw);\r\n\r\npwentk.on(\"sceneChanged\", function(project){\r\n\tconsole.log(canvas.getObjects());\r\n\tcanvas.remove(...canvas.getObjects());\r\n\tfor(var i in main.nowScene().sprites){\r\n\t\tif(main.nowScene().sprites[i].visible){\r\n\t\t\tpwentkFabric.newSprite(main.nowScene().sprites[i]);\r\n\t\t}\r\n\t}\r\n\tcanvas.renderAll();\r\n});\r\ncanvas.on(\"object:modified\", function(event){\r\n\tvar sprite = event.target.sprite;\r\n\tif(sprite){\r\n\t\tsprite\r\n\t\t.setScaleX(event.target.scaleX, false)\r\n\t\t.setScaleY(event.target.scaleY, false)\r\n\t\t.setX(event.target.left- canvas.width/2, false)\r\n\t\t.setY(-event.target.top+ canvas.height/2, false)\r\n\t\t.setRotation(event.target.angle);\r\n\t}\r\n});",
+    "static": true,
+    "longname": "C:/Pwentk/src/pwentkFabric.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 51,
+    "kind": "variable",
+    "name": "canvas",
+    "memberof": "src/pwentkFabric.js",
+    "static": true,
+    "longname": "src/pwentkFabric.js~canvas",
+    "access": "public",
+    "export": false,
+    "importPath": "pwentk/src/pwentkFabric.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "variable",
+    "name": "pwentkFabric",
+    "memberof": "src/pwentkFabric.js",
+    "static": true,
+    "longname": "src/pwentkFabric.js~pwentkFabric",
+    "access": "public",
+    "export": false,
+    "importPath": "pwentk/src/pwentkFabric.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"newSprite\": *, \"spriteToObject\": *, \"spriteReDraw\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
     "kind": "index",
     "content": "Pwentk\r\n======\r\nPwentk은 높은 성능과 자유도를 추구하는 블록코딩 플랫폼입니다.  \r\nPwentk은 아직 개발중이며 대부분의 기능은 완성되지 않았습니다.  \r\n<https://pwen.tk/docs/make>에서 현재까지 개발된 부분을 볼 수 있습니다.\r\n",
     "longname": "C:\\Pwentk\\README.md",

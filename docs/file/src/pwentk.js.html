@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/pwentk.js | pwentk</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="Pwentk ====== Pwentk&#xC740; &#xB192;&#xC740; &#xC131;&#xB2A5;&#xACFC; &#xC790;&#xC720;&#xB3C4;&#xB97C; &#xCD94;&#xAD6C;&#xD558;&#xB294; &#xBE14;&#xB85D;&#xCF54;&#xB529; &#xD50C;&#xB7AB;&#xD3FC;&#xC785;&#xB2C8;&#xB2E4;.   Pwentk&#xC740; &#xC544;&#xC9C1; &#xAC1C;&#xBC1C;&#xC911;&#xC774;&#xBA70; &#xB300;&#xBD80;&#xBD84;&#xC758; &#xAE30;&#xB2A5;&#xC740; &#xC644;&#xC131;&#xB418;&#xC9C0; &#xC54A;&#xC558;&#xC2B5;&#xB2C8;&#xB2E4;.   &lt;https://pwen.tk/docs/make&gt;&#xC5D0;&#xC11C; &#xD604;&#xC7AC;&#xAE4C;&#xC9C0; &#xAC1C;&#xBC1C;&#xB41C; &#xBD80;&#xBD84;&#xC744; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="pwentk"><meta property="twitter:description" content="Pwentk ====== Pwentk&#xC740; &#xB192;&#xC740; &#xC131;&#xB2A5;&#xACFC; &#xC790;&#xC720;&#xB3C4;&#xB97C; &#xCD94;&#xAD6C;&#xD558;&#xB294; &#xBE14;&#xB85D;&#xCF54;&#xB529; &#xD50C;&#xB7AB;&#xD3FC;&#xC785;&#xB2C8;&#xB2E4;.   Pwentk&#xC740; &#xC544;&#xC9C1; &#xAC1C;&#xBC1C;&#xC911;&#xC774;&#xBA70; &#xB300;&#xBD80;&#xBD84;&#xC758; &#xAE30;&#xB2A5;&#xC740; &#xC644;&#xC131;&#xB418;&#xC9C0; &#xC54A;&#xC558;&#xC2B5;&#xB2C8;&#xB2E4;.   &lt;https://pwen.tk/docs/make&gt;&#xC5D0;&#xC11C; &#xD604;&#xC7AC;&#xAE4C;&#xC9C0; &#xAC1C;&#xBC1C;&#xB41C; &#xBD80;&#xBD84;&#xC744; &#xBCFC; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/EntryDark/Pwentk"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  </ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/pwentk.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/* globals Image */
+/**
+ * Test
+ * @property
+ */
+var pwentk = {
+	/**
+	 * Test
+	 */
+		 Sprite: class{
+		/**
+		 * Test
+		 */
+		 constructor(name, visible, shapes, shapeNumber, scaleX, scaleY, x, y, z, rotation){
+		 	this.setName(name, false);
+		 	this.setVisible(visible || true, false);
+		 	this.shapes = shapes || [{name:&quot;Sample image&quot;,img:this.genImg(&quot;https://playentry.org/lib/entry-js/images/media/entrybot1.png&quot;)}];
+		 	this.setShape(shapeNumber || 0, false);
+		 	this.setScaleX(scaleX || 1, false);
+		 	this.setScaleY(scaleY || 1, false);
+		 	this.setX(x || 0, false);
+		 	this.setY(y || 0, false);
+		 	this.setZ(z || 0, false);
+		 	this.setRotation(rotation || 0, false);
+		 }
+
+		 setScene(scene){
+		 	this.scene = scene;
+		 }
+		 setName(name, doEvent = true){
+		 	if(!name){
+		 		this.setName(`&#xC2A4;&#xD504;&#xB77C;&#xC774;&#xD2B8; ${pwentk.genId()}`, doEvent);
+		 		pwentk.genErr(22,this);
+			}/*else if(pwentk.sprites.some(val=&gt;{return val.name==String(name);})){
+				this.setName(`&#xC2A4;&#xD504;&#xB77C;&#xC774;&#xD2B8; ${this.id}`, doEvent);
+				pwentk.genErr(11,this);
+			}*/else{
+				this.name = String(name);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		show(doEvent = true){
+			this.visible = true;
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		hide(doEvent = true){
+			this.visible = false;
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		setVisible(boolean, doEvent = true){
+			this.visible = Boolean(boolean);
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		setShape(n, doEvent = true){
+			if(!isNaN(n)){
+				if(this.shapes[Number(n)]){
+					this.shapeNumber = Number(n);
+				}else{
+					pwentk.genErr(14,this);
+				}
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		getShape(){
+			return this.shapes[this.shapeNumber];
+		}
+		setScaleX(scaleX, doEvent = true){
+			if(!isNaN(scaleX)){
+				this.scaleX = Number(scaleX);
+			}else{
+				pwentk.genErr(21,this);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		setScaleY(scaleY, doEvent = true){
+			if(!isNaN(scaleY)){
+				this.scaleY = Number(scaleY);
+			}else{
+				pwentk.genErr(21,this);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		//&#xC88C;&#xD45C;
+		setX(x, doEvent = true){
+			if(!isNaN(x)){
+				this.x = Number(x);
+			}else{
+				pwentk.genErr(21,this);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		setY(y, doEvent = true){
+			if(!isNaN(y)){
+				this.y = Number(y);
+			}else{
+				pwentk.genErr(21,this);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		setZ(z, doEvent = true){
+			if(!isNaN(z)){
+				this.z = Number(z);
+			}
+			else{
+				pwentk.genErr(21,this);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		setRotation(rotation, doEvent = true){
+			if(!isNaN(rotation)){
+				this.rotation = Number(rotation);
+			}
+			else{
+				pwentk.genErr(21,this);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		addX(x, doEvent = true){
+			if(!isNaN(x)){
+				this.x += Number(x);
+			}
+			else{
+				pwentk.genErr(21,this);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		addY(y, doEvent = true){
+			if(!isNaN(y)){
+				this.y += Number(y);
+			}
+			else{
+				pwentk.genErr(21,this);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		addZ(z, doEvent = true){
+			if(!isNaN(z)){
+				this.z += Number(z);
+			}
+			else{
+				pwentk.genErr(21,this);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+		addRotation(rotation, doEvent = true){
+			if(!isNaN(rotation)){
+				this.rotation += Number(rotation);
+			}
+			else{
+				pwentk.genErr(21,this);
+			}
+			if(doEvent){pwentk.fire(&quot;changed&quot;, this);}
+			return this;
+		}
+
+		genImg(src){
+			let img = new Image();
+			img.src = src;
+			return img;
+		}
+
+	},
+	BlockSet: class{
+		constructor(options){
+			this.name = options.name;
+			this.template = options.template;
+			this.func = options.func;
+			this.param = 
+			pwentk.nArray(this.template.match(/(?&lt;=\(\()(.*?)(?=\)\))/g))
+			.map(name =&gt; ({name: name, type: &quot;string&quot;, data: &quot;0&quot;}))
+			.concat(
+				pwentk.nArray(this.template.match(/(?&lt;=\&lt;\&lt;)(.*?)(?=\&gt;\&gt;)/g))
+				.map(name =&gt; ({name: name, type: &quot;boolean&quot;, data: true}))
+				)
+			.concat(
+				pwentk.nArray(this.template.match(/(?&lt;=\{\{)(.*?)(?=\}\})/g))
+				.map(name =&gt; ({name: name, type: &quot;function&quot;, data: function(){}}))
+				);
+		}
+	},
+	Block: class{
+		constructor(parent){
+			this.name = parent.name;
+			this.template = parent.template;
+			this.param = parent.param;
+			this.innerBlock = this.param.filter(val=&gt;val.type==&quot;function&quot;)
+		}
+		getPath(text){
+			var output = &quot;&quot;;
+			output += `M0 0 l 5 5 v -4 
+			a 1 1 90 0 1 1 -1  
+			h 70
+			a 5 5 180 0 1 0 10 `;
+			output += `H 11 `;
+
+			if(this.innerBlock.length &gt; 0){
+				output += `a 1 1 90 0 0 -1 1
+				v 4
+				l -5 -5`;
+				for(var i=0;i&lt;this.innerBlock.length-1;i++){
+					output += `v 10 
+					l 5 5 v -4 
+					a 1 1 90 0 1 1 -1  
+					h 20 
+					a 5 5 180 0 1 0 10 
+					H 11 
+					a 1 1 90 0 0 -1 1 
+					v 4 
+					l -5 -5 `;
+				}
+				output += `v 10 
+				l 5 5 v -4 
+				a 1 1 90 0 1 1 -1  
+				h 20 
+				a 5 5 180 0 1 0 10 `;
+			}
+			output += `H 6 a 1 1 90 0 0 -1 1 v 5 l -5 -5
+			Z`;
+			return output;
+		}
+	},
+	Scene: class{
+		constructor(options){
+			this.name = options.name;
+			this.sprites = [];
+		}
+
+		newSprite(sprite){
+			sprite.setScene(this);
+			this.sprites.push(sprite);
+			pwentk.fire(&quot;newSprite&quot;, sprite);
+		}
+	},
+	Project: class{
+		constructor(options){
+			this.name = options.name;
+			this.scenes = [new pwentk.Scene({&quot;name&quot;: &quot;&#xC7A5;&#xBA74; 1&quot;})];
+			this.nowSceneNo = 0;
+			pwentk.fire(&quot;sceneChanged&quot;, this);
+		}
+		setNowScene(sceneNo){
+			this.nowSceneNo = sceneNo;
+			pwentk.fire(&quot;sceneChanged&quot;, this);
+		}
+		nowScene(){
+			return this.scenes[this.nowSceneNo];
+		}
+		newScene(name){
+			this.scenes.push(new pwentk.Scene({&quot;name&quot;: name}));
+		}
+		deleteScene(sceneNo){
+			this.scenes.splice(sceneNo, 1);
+			if(this.nowSceneNo &gt; this.scenes.length - 1){
+				this.setNowScene(this.scenes.length - 1);
+			}else if(this.nowSceneNo &gt; sceneNo){
+				this.setNowScene(this.nowSceneNo - 1);
+			}
+		}
+	},
+	genErr: function(errCode, errSprite){
+		if(errSprite){
+			console.warn(new Error(`&quot;${errSprite.name}&quot; &#xC2A4;&#xD504;&#xB77C;&#xC774;&#xD2B8;&#xC5D0;&#xC11C; &#xC5D0;&#xB7EC; #${errCode} : &quot;${pwentk.errorCode[errCode]}&quot;`));
+		}else{
+			console.warn(new Error(`&#xC5D0;&#xB7EC; #${errCode} : &quot;${pwentk.errorCode[errCode]}&quot;`));
+		}
+	},
+	errorCode: {
+		&quot;10&quot;: &quot;&#xC798;&#xBABB;&#xB41C; &#xCC38;&#xC870;&quot;,
+		&quot;11&quot;: &quot;&#xC911;&#xBCF5;&#xB41C; &#xC2A4;&#xD504;&#xB77C;&#xC774;&#xD2B8; &#xC774;&#xB984;&quot;,
+		&quot;12&quot;: &quot;&#xC874;&#xC7AC;&#xD558;&#xC9C0; &#xC54A;&#xB294; &#xC2A4;&#xD504;&#xB77C;&#xC774;&#xD2B8; &#xBC88;&#xD638;&quot;,
+		&quot;13&quot;: &quot;&#xC874;&#xC7AC;&#xD558;&#xC9C0; &#xC54A;&#xB294; &#xC2A4;&#xD504;&#xB77C;&#xC774;&#xD2B8; &#xC774;&#xB984;&quot;,
+		&quot;14&quot;: &quot;&#xC874;&#xC7AC;&#xD558;&#xC9C0; &#xC54A;&#xB294; &#xBAA8;&#xC591; &#xBC88;&#xD638;&quot;,
+		&quot;15&quot;: &quot;&#xC874;&#xC7AC;&#xD558;&#xC9C0; &#xC54A;&#xB294; &#xBAA8;&#xC591; &#xC774;&#xB984;&quot;,
+
+		&quot;20&quot;: &quot;&#xC798;&#xBABB;&#xB41C; &#xC785;&#xB825; &#xD615;&#xC2DD;&quot;,
+		&quot;21&quot;: &quot;&#xC798;&#xBABB;&#xB41C; &#xC785;&#xB825; &#xD615;&#xC2DD; (Number&#xC5EC;&#xC57C; &#xD568;)&quot;,
+		&quot;22&quot;: &quot;&#xC2A4;&#xD504;&#xB77C;&#xC774;&#xD2B8; &#xC774;&#xB984;&#xC774; &#xC785;&#xB825;&#xB418;&#xC9C0; &#xC54A;&#xC74C;&quot;,
+		&quot;23&quot;: &quot;&#xC798;&#xBABB;&#xB41C; &#xC785;&#xB825; &#xD615;&#xC2DD; (String&#xC5EC;&#xC57C; &#xD568;)&quot;
+	},
+	event: {
+		newSprite: [],
+		changed: [],
+		sceneChanged: []
+	},
+	on: function(eventName, callback){
+		this.event[eventName].push(callback);
+	},
+	fire: function(eventName, param){
+		console.log(`&quot;${eventName}&quot; event fired`);
+		for(var i in this.event[eventName]){
+			this.event[eventName][i](param);
+		}
+	},
+	getSprite: function(scene, info, option = &quot;name&quot;){
+		switch(info.constructor.name){
+			case &quot;Number&quot;:{
+				let returnTemp = scene.sprites[info];
+				if(returnTemp){
+					return returnTemp;
+				}else{
+					pwentk.genErr(12);
+				}
+				break;
+			}
+			case &quot;String&quot;:{
+				let returnTemp = scene.sprites.filter(val =&gt; {return val[option] == info;})[0];
+				if(returnTemp){
+					return returnTemp;
+				}else{
+					pwentk.genErr(13);
+				}
+				break;
+			}
+		}
+	},
+	nArray: arr =&gt; arr?arr:[],
+	genId: () =&gt; Math.random().toString(36).substr(2, 5)
+};</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

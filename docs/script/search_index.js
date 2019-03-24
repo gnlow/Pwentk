@@ -280,5 +280,17 @@ window.esdocSearchIndex = [
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
     "src/.external-ecmascript.js~undefined",
     "external"
+  ],
+  [
+    "src/pwentk.js",
+    "file/src/pwentk.js.html",
+    "src/pwentk.js",
+    "file"
+  ],
+  [
+    "src/pwentkfabric.js",
+    "file/src/pwentkFabric.js.html",
+    "src/pwentkFabric.js",
+    "file"
   ]
 ]
