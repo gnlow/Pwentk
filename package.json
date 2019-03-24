@@ -1,0 +1,26 @@
+{
+  "name": "pwentk",
+  "version": "1.0.0",
+  "description": "Pwentk\r ======\r Pwentk은 높은 성능과 자유도를 추구하는 블록코딩 플랫폼입니다.  \r Pwentk은 아직 개발중이며 대부분의 기능은 완성되지 않았습니다.  \r <https://pwen.tk/docs/make>에서 현재까지 개발된 부분을 볼 수 있습니다.",
+  "main": "pwentk.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EntryDark/Pwentk.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EntryDark/Pwentk/issues"
+  },
+  "homepage": "https://github.com/EntryDark/Pwentk#readme",
+  "dependencies": {
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0"
+  }
+}
