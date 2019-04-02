@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "devserver": "webpack-dev-server --open --progress",
+    "serve": "webpack-dev-server --open --progress",
     "esdoc": "./node_modules/.bin/esdoc"
   },
   "repository": {
