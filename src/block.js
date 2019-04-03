@@ -5,7 +5,7 @@ export default class Block{
 		this.name = parent.name;
 		this.template = parent.template;
 		this.param = parent.param;
-		this.innerBlock = this.param.filter(val=>val.type=="function")
+		this.innerBlock = this.param.filter(val=>val.type=="function");
 	}
 	getPath(text){
 		var output = "";
