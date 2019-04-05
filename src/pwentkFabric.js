@@ -1,5 +1,7 @@
 /* globals fabric */
 /* globals pwentk */
+var main = new pwentk.Project({name: "새 작품"});
+
 var canvas = new fabric.Canvas("mainCanvas");
 canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
 
@@ -57,9 +59,9 @@ pwentk.on("changed", pwentkFabric.spriteReDraw);
 pwentk.on("sceneChanged", function(project){
 	console.log(canvas.getObjects());
 	canvas.remove(...canvas.getObjects());
-	for(var i in main.nowScene().sprites){
-		if(main.nowScene().sprites[i].visible){
-			pwentkFabric.newSprite(main.nowScene().sprites[i]);
+	for(var i in project.nowScene().sprites){
+		if(project.nowScene().sprites[i].visible){
+			pwentkFabric.newSprite(project.nowScene().sprites[i]);
 		}
 	}
 	canvas.renderAll();

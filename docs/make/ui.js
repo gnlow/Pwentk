@@ -67,7 +67,7 @@ Vue.component("pwentk-block",{
 		}
 	}
 });
-var main = new pwentk.Project({name: "새 작품"});
+
 var app = new Vue({
 	el: "#app",
 	data: {
