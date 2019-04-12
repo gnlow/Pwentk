@@ -1,4 +1,5 @@
 Vue.use(SemanticUIVue);
+
 document.addEventListener('contextmenu', function (e) {
 	e.preventDefault();
 }, false);
@@ -112,3 +113,10 @@ pwentk.on("sceneChanged", function(project){
 });
 window.addEventListener("resize", canvasResize);
 window.addEventListener("DOMContentLoaded", canvasResize);
+
+var canvas = new fabric.Canvas("mainCanvas");
+canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
+
+pwentkFabric.init({
+	canvas: canvas
+});
