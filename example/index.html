@@ -89,15 +89,15 @@
 	</sui-menu>
 </sui-menu>
 </sui-segment>
-<div id="main" :style="{'margin-top': topMargin, height: mainHeight}">
+<div id="main" :style="{'margin-top': topMargin, height: mainHeight, padding: '0.3rem'}">
 	<sui-grid :columns="2" stackable stretched style="height:100%;margin:0;">
-		<sui-grid-column :width="6">
+		<sui-grid-column :width="6" style="padding:0.5rem;">
 			<div id="canvases">
 				<canvas id="mainCanvas" height="360" width="640"></canvas>
 			</div>
 		</sui-grid-column>
-		<sui-grid-column :width="10" style="min-height:350px;">
-			<sui-segment style="padding: 0;">
+		<sui-grid-column :width="10" style="min-height:350px;padding:0.5rem;">
+			<sui-segment style="padding:0;">
 				<svg class="ws" id="ws" style="width:100%;height:100%;">
 					<component v-for="(block, index) in blocks" is="pwentk-block" :path="block.getPath()" :key="index" :text="block.template" :index="index"></component>
 				</svg>

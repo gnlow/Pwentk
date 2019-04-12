@@ -6,8 +6,8 @@ document.addEventListener('contextmenu', function (e) {
 function canvasResize(){
 	app.topMargin = document.getElementById("topbar").clientHeight+"px";
 	app.mainHeight = (window.innerHeight-document.getElementById("topbar").clientHeight)+"px";
-	var canvasParent = document.getElementById("canvases").parentNode;
-	var canvasWidth = canvasParent.offsetWidth-28;//window.getComputedStyle(canvasParent).getPropertyValue("padding").replace("px", "")*2;
+	var canvasParent = document.getElementById("canvases");
+	var canvasWidth = canvasParent.offsetWidth;//window.getComputedStyle(canvasParent).getPropertyValue("padding").replace("px", "")*2;
 	canvas.setWidth(canvasWidth);
 	canvas.setHeight(canvasWidth/16*9);
 	canvas.setDimensions({width: 1920, height: 1080},{backstoreOnly:true});
