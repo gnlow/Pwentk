@@ -11,4 +11,6 @@ pwentk.BlockSet = BlockSet;
 pwentk.Block = Block;
 pwentk.Sprite = Sprite;
 
+window.pwentk = pwentk;
+
 export default pwentk;

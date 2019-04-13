@@ -1,26 +1,19 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const AddModuleExportsPlugin = require('add-module-exports-webpack-plugin');
+
 module.exports = {
     entry: './src/pwentk.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/dist/',
-        filename: 'pwentk.js'
+        filename: 'pwentk.min.js',
+        library: 'pwentk',
+        libraryTarget: 'commonjs2',
+        globalObject: 'this'
     },
-    module: {
-        rules: [
-        {
-            test: /\.js$/,
-            include: path.join(__dirname),
-            exclude: /(node_modules)|(dist)/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ["@babel/preset-env"]
-                }
-            }
-        }
-        ]
-    }
+    plugins: [
+        new AddModuleExportsPlugin()
+    ]
 };

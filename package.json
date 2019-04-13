@@ -1,13 +1,13 @@
 {
   "name": "pwentk",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Pwentk\r ======\r Pwentk은 높은 성능과 자유도를 추구하는 블록코딩 플랫폼입니다.  \r Pwentk은 아직 개발중이며 대부분의 기능은 완성되지 않았습니다.  \r <https://pwen.tk/docs/make>에서 현재까지 개발된 부분을 볼 수 있습니다.",
-  "main": "pwentk.js",
+  "main": "dist/pwentk.min.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && webpack --config browser.webpack.config.js",
     "serve": "webpack-dev-server --open --progress",
     "esdoc": "./node_modules/.bin/esdoc"
   },
@@ -15,7 +15,11 @@
     "type": "git",
     "url": "git+https://github.com/EntryDark/Pwentk.git"
   },
-  "author": "",
+  "files": [
+    "dist"
+  ],
+  "browser": "./browser/pwentk.min.js",
+  "author": "Keunho Park <entrydark@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/EntryDark/Pwentk/issues"
@@ -25,6 +29,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
+    "add-module-exports-webpack-plugin": "^0.2.0",
     "babel-loader": "^8.0.5",
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
